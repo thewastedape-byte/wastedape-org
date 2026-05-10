@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  background: #060608;
+  color: #F5F0E8;
+  font-family: 'Georgia', serif;
+  margin: 0; padding: 0;
+}
+
+.btn-primary {
+  background: #C8922A;
+  color: #060608;
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 28px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: opacity 0.15s;
+}
+.btn-primary:hover { opacity: 0.85; }
+
+.btn-outline {
+  background: transparent;
+  color: #C8922A;
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  border: 2px solid #C8922A;
+  border-radius: 8px;
+  padding: 12px 28px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.15s;
+}
+.btn-outline:hover { background: rgba(200,146,42,0.1); }
