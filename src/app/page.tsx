@@ -1,6 +1,5 @@
 'use client'
 import Link from 'next/link'
-import Image from 'next/image'
 
 const APPS = [
   {
@@ -9,7 +8,6 @@ const APPS = [
     desc: 'Diagnose any marine engine problem instantly. Photo analysis, service manuals, work orders, fleet management. Built for boaters and marine service shops.',
     url: 'https://boatbuddy.thewastedape.com',
     logo: '/boat-buddy-logo.png',
-    color: '#C68B3A',
     features: ['AI engine diagnosis', '25 system diagrams', 'Service manuals', 'Work orders + invoices', 'Parts inventory', 'Team management'],
   },
   {
@@ -18,15 +16,15 @@ const APPS = [
     desc: 'From pickup trucks to heavy equipment — fault codes, DPF regens, DEF systems, and more. Built for fleet mechanics and heavy equipment operators.',
     url: 'https://dieseldude.thewastedape.com',
     logo: '/diesel-dude-logo.png',
-    color: '#C68B3A',
     features: ['Cummins, CAT, Detroit, Deere', 'OBD2 + J1939 fault codes', 'Asset log by hours', 'Work orders + invoices', 'RTA Fleet integration (coming)', 'Service manuals'],
   },
 ]
 
-const SERVICES = [
-  { name: 'Basic Setup', price: '$299', desc: '1-hour remote session. AI assistant connected to your phone, email, and calendar. Ready same day.' },
-  { name: 'Pro Setup', price: '$799', desc: '3-hour custom build. Full integration with your business tools — eBay, Gmail, Shopify, and more.' },
-  { name: 'Monthly Support', price: 'from $49/mo', desc: 'Ongoing maintenance, updates, and support. Your AI keeps working perfectly.' },
+const SERVICES_PREVIEW = [
+  { icon: '🤖', name: 'Custom AI Bot Builds', price: '$299 setup + $99/mo', desc: 'We build and deploy a custom AI assistant for your business in under a day.' },
+  { icon: '📞', name: 'AI Telemarketing', price: 'Per campaign', desc: 'AI-powered outbound calling that qualifies leads and books appointments automatically.' },
+  { icon: '🎯', name: 'Lead Generation Bots', price: 'From $199/mo', desc: 'Automated lead scraping, qualification, and outreach for your target industry.' },
+  { icon: '📅', name: 'Appointment Booking Bots', price: '$199 setup', desc: 'AI that handles scheduling, reminders, and confirmations — 24/7.' },
 ]
 
 export default function HomePage() {
@@ -47,29 +45,29 @@ export default function HomePage() {
         </div>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
           <a href="#apps" style={{ ...gold, fontSize: '13px', textDecoration: 'none' }}>Apps</a>
-          <a href="#services" style={{ ...gold, fontSize: '13px', textDecoration: 'none' }}>Services</a>
-          <Link href="/book" className="btn-primary" style={{ padding: '10px 20px', fontSize: '13px' }}>Book a Session</Link>
+          <Link href="/services" style={{ ...gold, fontSize: '13px', textDecoration: 'none' }}>Services</Link>
+          <a href="#contact" style={{ ...gold, fontSize: '13px', textDecoration: 'none' }}>Contact</a>
+          <Link href="/book" className="btn-primary" style={{ padding: '10px 20px', fontSize: '13px' }}>Get Started</Link>
         </div>
       </nav>
 
       {/* Hero */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', paddingTop: '80px', overflow: 'hidden' }}>
-        {/* Background image */}
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/background.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 1.0 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(6,6,8,0.1) 0%, rgba(6,6,8,0.5) 70%, rgba(6,6,8,1) 100%)' }} />
         
         <div style={{ position: 'relative', zIndex: 10, padding: '0 24px', maxWidth: '800px', margin: '0 auto' }}>
-          <img src="/logo.svg" alt="WastedApe" style={{ height: '320px', width: '320px', borderRadius: '50%', marginBottom: '28px', border: '3px solid rgba(200,146,42,0.6)', boxShadow: '0 0 60px rgba(200,146,42,0.3)' }} />
+          <img src="/logo.svg" alt="WastedApe" style={{ height: '280px', width: '280px', borderRadius: '50%', marginBottom: '28px', border: '3px solid rgba(200,146,42,0.6)', boxShadow: '0 0 60px rgba(200,146,42,0.3)' }} />
           <p style={{ ...gold, fontSize: '12px', letterSpacing: '4px', marginBottom: '12px' }}>AI &bull; TECH &bull; SOLUTIONS</p>
           <h1 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 'bold', lineHeight: '1.2', marginBottom: '20px' }}>
             Technology that works as hard as you do.
           </h1>
-          <p style={{ ...dim, fontSize: '18px', lineHeight: '1.7', marginBottom: '36px', maxWidth: '580px', margin: '0 auto 36px' }}>
-            AI assistants custom-built for your business. Marine diagnostics, diesel fleet tools, automated eBay listing, email management, and more. Setup in hours.
+          <p style={{ ...dim, fontSize: '18px', lineHeight: '1.7', marginBottom: '36px', maxWidth: '600px', margin: '0 auto 36px' }}>
+            AI assistants custom-built for your business. Marine diagnostics, diesel fleet tools, lead generation, AI calling, and more. Setup in hours, not months.
           </p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/book" className="btn-primary" style={{ fontSize: '17px', padding: '16px 36px' }}>Book AI Setup — from $299</Link>
-            <a href="#apps" className="btn-outline">See Our Apps</a>
+            <Link href="/services" className="btn-primary" style={{ fontSize: '17px', padding: '16px 36px' }}>See All Services</Link>
+            <Link href="/book" className="btn-outline">Book a Free Call</Link>
           </div>
         </div>
       </section>
@@ -106,26 +104,44 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Services */}
-      <section id="services" style={{ padding: '80px 24px', background: 'rgba(200,146,42,0.04)', borderTop: '1px solid rgba(200,146,42,0.12)' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <p style={{ ...gold, fontSize: '12px', letterSpacing: '3px', textAlign: 'center', marginBottom: '8px' }}>AI SETUP SERVICES</p>
-          <h2 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '36px', fontWeight: 'bold', textAlign: 'center', marginBottom: '12px' }}>We build your AI for you</h2>
-          <p style={{ ...dim, fontSize: '16px', textAlign: 'center', marginBottom: '48px' }}>Remote setup sessions. Your AI assistant ready in hours, not months.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
-            {SERVICES.map((s, i) => (
-              <div key={s.name} style={{ background: 'rgba(12,10,8,0.9)', border: i === 1 ? '2px solid #C8922A' : '1px solid rgba(200,146,42,0.2)', borderRadius: '14px', padding: '28px' }}>
-                {i === 1 && <p style={{ ...gold, fontSize: '11px', letterSpacing: '2px', marginBottom: '8px', fontWeight: 'bold' }}>MOST POPULAR</p>}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-                  <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '20px', margin: 0 }}>{s.name}</h3>
-                  <p style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '20px', fontWeight: 'bold', margin: 0 }}>{s.price}</p>
-                </div>
+      {/* Services Preview */}
+      <section style={{ padding: '80px 24px', background: 'rgba(200,146,42,0.04)', borderTop: '1px solid rgba(200,146,42,0.12)' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <p style={{ ...gold, fontSize: '12px', letterSpacing: '3px', textAlign: 'center', marginBottom: '8px' }}>WHAT WE BUILD</p>
+          <h2 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '36px', fontWeight: 'bold', textAlign: 'center', marginBottom: '12px' }}>Full-Service AI for Your Business</h2>
+          <p style={{ ...dim, fontSize: '16px', textAlign: 'center', marginBottom: '48px' }}>From lead gen to customer calls — we automate the work that's eating your time.</p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '48px' }}>
+            {SERVICES_PREVIEW.map(s => (
+              <div key={s.name} style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.2)', borderRadius: '14px', padding: '28px' }}>
+                <div style={{ fontSize: '32px', marginBottom: '12px' }}>{s.icon}</div>
+                <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '18px', margin: '0 0 6px' }}>{s.name}</h3>
+                <p style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '13px', margin: '0 0 10px', fontWeight: 'bold' }}>{s.price}</p>
                 <p style={{ ...dim, fontSize: '14px', lineHeight: '1.6', margin: 0 }}>{s.desc}</p>
               </div>
             ))}
           </div>
-          <div style={{ textAlign: 'center', marginTop: '40px' }}>
-            <Link href="/book" className="btn-primary" style={{ fontSize: '17px', padding: '16px 40px' }}>Book Your Setup</Link>
+
+          <div style={{ textAlign: 'center' }}>
+            <Link href="/services" className="btn-primary" style={{ fontSize: '17px', padding: '16px 40px', marginRight: '16px' }}>See All Services</Link>
+            <Link href="/book" className="btn-outline">Book a Free Call</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Banner */}
+      <section id="contact" style={{ padding: '80px 24px', textAlign: 'center', background: 'rgba(200,146,42,0.06)', borderTop: '1px solid rgba(200,146,42,0.15)', borderBottom: '1px solid rgba(200,146,42,0.15)' }}>
+        <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+          <p style={{ ...gold, fontSize: '12px', letterSpacing: '3px', marginBottom: '16px' }}>READY TO AUTOMATE?</p>
+          <h2 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 'bold', marginBottom: '16px', lineHeight: '1.2' }}>
+            Get your AI running today.
+          </h2>
+          <p style={{ ...dim, fontSize: '18px', lineHeight: '1.7', marginBottom: '36px' }}>
+            Book a free 15-minute call. We'll figure out exactly what to build, give you a price, and start the same week.
+          </p>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/book" className="btn-primary" style={{ fontSize: '18px', padding: '18px 44px' }}>Book Free Call</Link>
+            <a href="mailto:thewastedape@gmail.com" className="btn-outline">Email Us</a>
           </div>
         </div>
       </section>
@@ -138,9 +154,10 @@ export default function HomePage() {
             &copy; 2026 WastedApe &bull; wastedape.org
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '20px' }}>
+        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
           <a href="https://boatbuddy.thewastedape.com" style={{ color: 'rgba(200,146,42,0.5)', fontFamily: 'Georgia, serif', fontSize: '12px', textDecoration: 'none' }}>Boat Buddy</a>
           <a href="https://dieseldude.thewastedape.com" style={{ color: 'rgba(200,146,42,0.5)', fontFamily: 'Georgia, serif', fontSize: '12px', textDecoration: 'none' }}>Diesel Dude</a>
+          <Link href="/services" style={{ color: 'rgba(200,146,42,0.5)', fontFamily: 'Georgia, serif', fontSize: '12px', textDecoration: 'none' }}>Services</Link>
           <a href="mailto:thewastedape@gmail.com" style={{ color: 'rgba(200,146,42,0.5)', fontFamily: 'Georgia, serif', fontSize: '12px', textDecoration: 'none' }}>Contact</a>
         </div>
       </footer>
