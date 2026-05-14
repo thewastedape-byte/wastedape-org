@@ -3,6 +3,15 @@ import Link from 'next/link'
 
 const APPS = [
   {
+    name: 'ContentBuddy',
+    tagline: 'AI Content Studio for Creators — Coming Soon',
+    desc: 'Paste a topic or script and get everything in one click: full video script, 10 YouTube titles, SEO blog post, Instagram caption, TikTok script, Twitter thread, LinkedIn post, and email newsletter.',
+    url: null,
+    logo: '/content-buddy-logo.png',
+    comingSoon: true,
+    features: ['Full video script from any topic', 'YouTube titles, description & chapters', 'SEO-optimized blog post', 'Instagram, TikTok, Twitter & LinkedIn captions', 'Email newsletter version', 'One click — everything in 30 seconds'],
+  },
+  {
     name: 'Boat Buddy',
     tagline: 'AI Marine Diagnostic Assistant',
     desc: 'Diagnose any marine engine problem instantly. Photo analysis, service manuals, work orders, fleet management. Built for boaters and marine service shops.',
