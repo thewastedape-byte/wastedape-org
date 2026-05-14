@@ -8,15 +8,16 @@ const APPS = [
     desc: 'Diagnose any marine engine problem instantly. Photo analysis, service manuals, work orders, fleet management. Built for boaters and marine service shops.',
     url: 'https://boatbuddy.thewastedape.com',
     logo: '/boat-buddy-logo.png',
-    features: ['AI engine diagnosis', '25 system diagrams', 'Service manuals', 'Work orders + invoices', 'Parts inventory', 'Team management'],
+    features: ['AI engine diagnosis', '25 system diagrams', 'Service manuals', 'Work orders + invoices', 'Parts inventory', 'Team management', '⚓ Add-on: Yard Manager ($29/mo)', '🚢 Add-on: Marina Manager ($49/mo)'],
   },
   {
     name: 'Diesel Dude',
-    tagline: 'AI Diesel Diagnostic Assistant',
-    desc: 'From pickup trucks to heavy equipment — fault codes, DPF regens, DEF systems, and more. Built for fleet mechanics and heavy equipment operators.',
-    url: 'https://dieseldude.thewastedape.com',
+    tagline: 'AI Diesel Diagnostic Assistant — Coming Soon',
+    desc: 'From pickup trucks to heavy equipment — fault codes, DPF regens, DEF systems, and more. Built for fleet mechanics and heavy equipment operators. Currently in development.',
+    url: null,
     logo: '/diesel-dude-logo.png',
-    features: ['Cummins, CAT, Detroit, Deere', 'OBD2 + J1939 fault codes', 'Asset log by hours', 'Work orders + invoices', 'RTA Fleet integration (coming)', 'Service manuals'],
+    comingSoon: true,
+    features: ['Cummins, CAT, Detroit, Deere', 'OBD2 + J1939 fault codes', 'Asset log by hours', 'Work orders + invoices', 'RTA Fleet integration', 'Service manuals'],
   },
 ]
 
@@ -96,9 +97,15 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              <a href={app.url} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ textAlign: 'center', display: 'block', textDecoration: 'none' }}>
-                Try {app.name} Free &#8594;
-              </a>
+              {(app as any).comingSoon ? (
+                <div style={{ textAlign: 'center', padding: '12px', borderRadius: '10px', background: 'rgba(200,146,42,0.08)', border: '1px dashed rgba(200,146,42,0.3)' }}>
+                  <p style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '13px', margin: 0 }}>🚧 Under Development — Coming Soon</p>
+                </div>
+              ) : (
+                <a href={app.url!} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ textAlign: 'center', display: 'block', textDecoration: 'none' }}>
+                  Try {app.name} Free &#8594;
+                </a>
+              )}
             </div>
           ))}
         </div>
