@@ -21,12 +21,21 @@ const APPS = [
   },
   {
     name: 'ContentBuddy',
-    tagline: 'AI Content Studio for Creators — Coming Soon',
+    tagline: 'AI Content Studio for Creators',
     desc: 'Paste a topic or script and get everything in one click: full video script, 10 YouTube titles, SEO blog post, Instagram caption, TikTok script, Twitter thread, LinkedIn post, and email newsletter.',
-    url: null,
+    url: 'https://content-buddy-app.onrender.com',
     logo: '/content-buddy-logo.svg',
-    comingSoon: true,
+    comingSoon: false,
     features: ['Full video script from any topic', 'YouTube titles, description & chapters', 'SEO-optimized blog post', 'Instagram, TikTok, Twitter & LinkedIn captions', 'Email newsletter version', 'One click — everything in 30 seconds'],
+  },
+  {
+    name: 'CodexBuddy',
+    tagline: 'AI Coding Assistant for Developers',
+    desc: 'Fix bugs, complete code, explain logic, convert between languages, generate from scratch. Like GitHub Copilot — at a fraction of the price.',
+    url: 'https://codex-buddy-app.onrender.com',
+    logo: '/logo.svg',
+    comingSoon: false,
+    features: ['AI code completion & generation', 'Bug finder & fixer', 'Code explainer in plain English', 'Convert between any languages', 'Docstring & comment generator', 'Starter $7.99/mo · Pro $19.99/mo unlimited'],
   },
 ]
 
