@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'WastedApe Tech — AI Tools & Automation for Trade Businesses | Veteran Owned',
   description: 'Custom AI tools for marine shops, diesel mechanics, fleet managers, and trade businesses. Boat Buddy AI, Diesel Dude AI, lead generation, AI calling bots. Veteran-owned.',
   keywords: 'AI tools for trades, marine AI software, diesel mechanic software, fleet management AI, AI calling bot, lead generation AI, veteran owned tech company',
+  verification: { google: 'uvIGAMhoKfBVS3ttGVvQ_IOUTGSfoZYHnRd6If-pkxI' },
   themeColor: '#060608',
   openGraph: {
     title: 'WastedApe Tech — AI Tools & Automation for Trade Businesses | Veteran Owned',
