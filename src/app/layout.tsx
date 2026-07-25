@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
 import Analytics from '@/components/Analytics'
+import ViewTracker from '@/components/ViewTracker'
 
 export const metadata: Metadata = {
   title: 'WastedApe Tech — AI Tools & Automation for Trade Businesses | Veteran Owned',
@@ -73,7 +75,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body style={{ background: '#0a0a0a', margin: 0 }}>
+        {/* Google Analytics - REPLACE G-WASTEDAPE01 with real Measurement ID from analytics.google.com */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-WASTEDAPE01"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-WASTEDAPE01');
+          `}
+        </Script>
         <Analytics />
+        <ViewTracker />
         {children}
       </body>
     </html>
