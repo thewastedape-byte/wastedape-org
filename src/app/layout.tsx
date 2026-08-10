@@ -5,13 +5,13 @@ import Analytics from '@/components/Analytics'
 import ViewTracker from '@/components/ViewTracker'
 
 export const metadata: Metadata = {
-  title: 'WastedApe Tech — AI Tools & Automation for Trade Businesses | Veteran Owned',
+  title: 'WastedApe Tech - AI Tools & Automation for Trade Businesses | Veteran Owned',
   description: 'Custom AI tools for marine shops, diesel mechanics, fleet managers, and trade businesses. Boat Buddy AI, Diesel Dude AI, lead generation, AI calling bots. Veteran-owned.',
   keywords: 'AI tools for trades, marine AI software, diesel mechanic software, fleet management AI, AI calling bot, lead generation AI, veteran owned tech company',
   verification: { google: 'uvIGAMhoKfBVS3ttGVvQ_IOUTGSfoZYHnRd6If-pkxI' },
   themeColor: '#060608',
   openGraph: {
-    title: 'WastedApe Tech — AI Tools & Automation for Trade Businesses | Veteran Owned',
+    title: 'WastedApe Tech - AI Tools & Automation for Trade Businesses | Veteran Owned',
     description: 'Custom AI tools for marine shops, diesel mechanics, fleet managers, and trade businesses. Boat Buddy AI, Diesel Dude AI, lead generation, AI calling bots. Veteran-owned.',
     url: 'https://wastedape.org',
     siteName: 'WastedApe Tech',
@@ -20,14 +20,14 @@ export const metadata: Metadata = {
         url: 'https://wastedape.org/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'WastedApe Tech — AI Tools for Trade Businesses',
+        alt: 'WastedApe Tech - AI Tools for Trade Businesses',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'WastedApe Tech — AI Tools & Automation for Trade Businesses | Veteran Owned',
+    title: 'WastedApe Tech - AI Tools & Automation for Trade Businesses | Veteran Owned',
     description: 'Custom AI tools for marine shops, diesel mechanics, fleet managers, and trade businesses. Veteran-owned.',
     images: ['https://wastedape.org/og-image.png'],
   },
@@ -38,7 +38,7 @@ const jsonLd = {
   '@type': 'Organization',
   name: 'WastedApe Tech',
   url: 'https://wastedape.org',
-  description: 'Veteran-owned AI technology company building custom AI tools for trade businesses — marine shops, diesel mechanics, fleet managers, and more.',
+  description: 'Veteran-owned AI technology company building custom AI tools for trade businesses - marine shops, diesel mechanics, fleet managers, and more.',
   logo: 'https://wastedape.org/logo.svg',
   sameAs: [],
   hasOfferCatalog: {
@@ -67,7 +67,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <meta name="google-site-verification" content="GOOGLE_VERIFICATION_CODE_HERE" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script
           type="application/ld+json"
@@ -75,9 +74,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body style={{ background: '#0a0a0a', margin: 0 }}>
-        {/* Google Analytics - REPLACE G-WASTEDAPE01 with real Measurement ID from analytics.google.com */}
+        {/* Google Analytics */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-WASTEDAPE01"
+          src="https://www.googletagmanager.com/gtag/js?id=G-ESB6FDN43Y"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -85,7 +84,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-WASTEDAPE01');
+            gtag('config', 'G-ESB6FDN43Y');
+          `}
+        </Script>
+        {/* Microsoft Clarity */}
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "y08pa16460");
           `}
         </Script>
         <Analytics />
