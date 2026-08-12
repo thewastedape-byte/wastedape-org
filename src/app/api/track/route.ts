@@ -1,62 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
 
-const ANALYTICS_FILE = path.join(process.cwd(), 'analytics.json')
-
-interface AnalyticsData {
-  totalViews: number
-  pageBreakdown: Record<string, number>
-  dailyBreakdown: Record<string, { total: number; pages: Record<string, number> }>
-  lastUpdated: string | null
-}
-
-function loadAnalytics(): AnalyticsData {
-  try {
-    if (fs.existsSync(ANALYTICS_FILE)) {
-      const raw = fs.readFileSync(ANALYTICS_FILE, 'utf8')
-      return JSON.parse(raw)
-    }
-  } catch {
-    // ignore
-  }
-  return {
-    totalViews: 0,
-    pageBreakdown: {},
-    dailyBreakdown: {},
-    lastUpdated: null,
-  }
-}
-
-function saveAnalytics(data: AnalyticsData) {
-  try {
-    data.lastUpdated = new Date().toISOString()
-    fs.writeFileSync(ANALYTICS_FILE, JSON.stringify(data, null, 2), 'utf8')
-  } catch {
-    // ignore in serverless/read-only environments
-  }
-}
+const SUPABASE_URL = process.env.SUPABASE_URL!
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY!
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const { page = '/' } = body
 
-    const data = loadAnalytics()
-    const today = new Date().toISOString().split('T')[0]
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/page_views`, {
+      method: 'POST',
+      headers: {
+        apikey: SUPABASE_SERVICE_KEY,
+        Authorization: `Bearer ${SUPABASE_SERVICE_KEY}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal',
+      },
+      body: JSON.stringify({ path: page }),
+    })
 
-    data.totalViews++
-    data.pageBreakdown[page] = (data.pageBreakdown[page] || 0) + 1
-
-    if (!data.dailyBreakdown[today]) {
-      data.dailyBreakdown[today] = { total: 0, pages: {} }
+    if (!res.ok) {
+      const err = await res.text()
+      console.error('Supabase insert error:', err)
+      return NextResponse.json({ ok: false }, { status: 500 })
     }
-    data.dailyBreakdown[today].total++
-    data.dailyBreakdown[today].pages[page] = (data.dailyBreakdown[today].pages[page] || 0) + 1
 
-    saveAnalytics(data)
     return NextResponse.json({ ok: true })
-  } catch {
+  } catch (err) {
+    console.error('Track error:', err)
     return NextResponse.json({ ok: false }, { status: 400 })
   }
 }
