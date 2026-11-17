@@ -154,6 +154,61 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Consulting Services */}
+      <section style={{ padding: '80px 24px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <p style={{ ...gold, fontSize: '12px', letterSpacing: '3px', textAlign: 'center', marginBottom: '8px' }}>CONSULTING</p>
+          <h2 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '36px', fontWeight: 'bold', textAlign: 'center', marginBottom: '12px' }}>Industrial & Infrastructure Consulting</h2>
+          <p style={{ ...dim, fontSize: '16px', textAlign: 'center', marginBottom: '48px' }}>20 years of hands-on industrial controls and critical infrastructure experience. On-site in eastern OH/WV or remote nationwide.</p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '28px', marginBottom: '28px' }}>
+
+            {/* Industrial Controls */}
+            <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '16px', padding: '32px' }}>
+              <div style={{ fontSize: '36px', marginBottom: '12px' }}>🏭</div>
+              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '22px', marginBottom: '6px' }}>Industrial Controls & Automation</h3>
+              <p style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '14px', fontWeight: 'bold', marginBottom: '12px' }}>$75–$150/hr &bull; On-site OH/WV or Remote</p>
+              <p style={{ ...dim, fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>Siemens S7, Allen-Bradley, SCADA, PLC programming, HMI, VFDs, and OT networking. 20+ years on the floor. The technician who shows up and actually fixes it.</p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {['Siemens TIA Portal / S7-1500 / PROFINET', 'Allen-Bradley Studio 5000 / RSLogix / ControlLogix', 'SCADA system design & integration', 'HMI configuration & commissioning', 'VFD installation & programming', 'CANbus / LIN bus / J1939 / PROFINET', 'OT network design & troubleshooting', 'OT/IT convergence consulting'].map(f => (
+                  <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', color: 'rgba(245,240,232,0.65)', fontFamily: 'Georgia, serif', fontSize: '13px', marginBottom: '6px' }}>
+                    <span style={{ color: '#C8922A', flexShrink: 0 }}>&#10003;</span> {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Data Center Audits */}
+            <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '16px', padding: '32px' }}>
+              <div style={{ fontSize: '36px', marginBottom: '12px' }}>⚡</div>
+              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '22px', marginBottom: '6px' }}>Data Center Energy Audits</h3>
+              <p style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '14px', fontWeight: 'bold', marginBottom: '12px' }}>$200–$5,000/engagement &bull; NoVA/Ashburn Focus</p>
+              <p style={{ ...dim, fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>PUE/WUE optimization and energy efficiency audits for data center operators. Northern Virginia is 70% of global internet traffic — we're 2 hours away and actively serving this market.</p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {['PUE & WUE measurement and benchmarking', 'Electrical consumption analysis (clamp meter)', 'Thermal imaging & hotspot detection', 'Cooling tower water chemistry (TDS/pH)', 'Utility bill audit — 12-month analysis', 'Cooling system efficiency assessment', 'Written report with ROI recommendations', 'Monitoring subscriptions ($99–$299/mo)'].map(f => (
+                  <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', color: 'rgba(245,240,232,0.65)', fontFamily: 'Georgia, serif', fontSize: '13px', marginBottom: '6px' }}>
+                    <span style={{ color: '#C8922A', flexShrink: 0 }}>&#10003;</span> {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+
+          {/* Credentials bar */}
+          <div style={{ background: 'rgba(200,146,42,0.06)', border: '1px solid rgba(200,146,42,0.15)', borderRadius: '12px', padding: '20px 28px', display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
+            {['ABYC Certified Marine Tech', 'Google Cybersecurity Cert', 'John Deere University Level 2', 'USMC MOS 2111 — Systems Maintenance', '20+ Yrs IT & Industrial', '10+ Production AI Apps'].map(c => (
+              <span key={c} style={{ color: 'rgba(245,240,232,0.6)', fontFamily: 'Georgia, serif', fontSize: '12px', letterSpacing: '0.5px' }}>✓ {c}</span>
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '36px', display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/book" className="btn-primary" style={{ fontSize: '16px', padding: '14px 36px' }}>Book a Consultation</Link>
+            <a href="/daniel-bloom-resume.pdf" download className="btn-outline" style={{ fontSize: '16px', padding: '14px 36px', textDecoration: 'none' }}>Download Resume</a>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Banner */}
       <section id="contact" style={{ padding: '80px 24px', textAlign: 'center', background: 'rgba(200,146,42,0.06)', borderTop: '1px solid rgba(200,146,42,0.15)', borderBottom: '1px solid rgba(200,146,42,0.15)' }}>
         <div style={{ maxWidth: '700px', margin: '0 auto' }}>
