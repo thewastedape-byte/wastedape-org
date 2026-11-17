@@ -209,19 +209,41 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Banner */}
-      <section id="contact" style={{ padding: '80px 24px', textAlign: 'center', background: 'rgba(200,146,42,0.06)', borderTop: '1px solid rgba(200,146,42,0.15)', borderBottom: '1px solid rgba(200,146,42,0.15)' }}>
-        <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-          <p style={{ ...gold, fontSize: '12px', letterSpacing: '3px', marginBottom: '16px' }}>READY TO AUTOMATE?</p>
-          <h2 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 'bold', marginBottom: '16px', lineHeight: '1.2' }}>
-            Get your AI running today.
-          </h2>
-          <p style={{ ...dim, fontSize: '18px', lineHeight: '1.7', marginBottom: '36px' }}>
-            Book a free 15-minute call. We'll figure out exactly what to build, give you a price, and start the same week.
-          </p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/book" className="btn-primary" style={{ fontSize: '18px', padding: '18px 44px' }}>Book Free Call</Link>
-            <a href="mailto:thewastedape@gmail.com" className="btn-outline">Email Us</a>
+      {/* Quick Contact / Booking */}
+      <section id="contact" style={{ padding: '80px 24px', background: 'rgba(200,146,42,0.06)', borderTop: '1px solid rgba(200,146,42,0.15)', borderBottom: '1px solid rgba(200,146,42,0.15)' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <p style={{ ...gold, fontSize: '12px', letterSpacing: '3px', textAlign: 'center', marginBottom: '8px' }}>GET IN TOUCH</p>
+          <h2 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 'bold', textAlign: 'center', marginBottom: '12px', lineHeight: '1.2' }}>Ready to get started?</h2>
+          <p style={{ ...dim, fontSize: '17px', lineHeight: '1.7', textAlign: 'center', marginBottom: '48px', maxWidth: '600px', margin: '0 auto 48px' }}>Book a free 15-minute call. We'll scope your project, give you a firm price, and start the same week.</p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+
+            <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '14px', padding: '28px', textAlign: 'center' }}>
+              <div style={{ fontSize: '36px', marginBottom: '12px' }}>📞</div>
+              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '8px' }}>Call or Text</h3>
+              <a href="tel:+13304199283" style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', display: 'block', marginBottom: '6px' }}>(330) 419-9283</a>
+              <p style={{ ...dim, fontSize: '13px', margin: 0 }}>Mon–Fri, 8am–6pm EST<br/>Eastern OH / WV preferred for on-site</p>
+            </div>
+
+            <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '14px', padding: '28px', textAlign: 'center' }}>
+              <div style={{ fontSize: '36px', marginBottom: '12px' }}>📅</div>
+              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '8px' }}>Book a Free Call</h3>
+              <p style={{ ...dim, fontSize: '14px', marginBottom: '20px', lineHeight: '1.6' }}>15 minutes. No sales pitch — just scoping your project and giving you a real number.</p>
+              <Link href="/book" className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none', padding: '12px 24px', fontSize: '15px' }}>Schedule Now →</Link>
+            </div>
+
+            <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '14px', padding: '28px', textAlign: 'center' }}>
+              <div style={{ fontSize: '36px', marginBottom: '12px' }}>📧</div>
+              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '8px' }}>Email</h3>
+              <a href="mailto:thewastedape@gmail.com" style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '15px', fontWeight: 'bold', textDecoration: 'none', display: 'block', marginBottom: '6px' }}>thewastedape@gmail.com</a>
+              <p style={{ ...dim, fontSize: '13px', marginBottom: '16px' }}>Quotes, questions, RFPs — usually respond same day.</p>
+              <a href="/daniel-bloom-resume.pdf" download style={{ color: 'rgba(200,146,42,0.7)', fontFamily: 'Georgia, serif', fontSize: '13px', textDecoration: 'underline' }}>⬇ Download Resume / Portfolio</a>
+            </div>
+
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <p style={{ ...dim, fontSize: '14px' }}>Based in <strong style={{ color: '#F5F0E8' }}>West Virginia</strong> · On-site in eastern OH/WV · Remote nationwide · Available immediately</p>
           </div>
         </div>
       </section>
