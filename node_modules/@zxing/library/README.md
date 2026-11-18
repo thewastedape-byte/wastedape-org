@@ -9,13 +9,14 @@ Check out [STRICH](https://strich.io/) – Barcode Scanning for Web Apps.
 
 > [!WARNING]
 > The project is in maintenance mode, meaning, changes are driven by contributed patches.
-> Only bug fixes and minor enhancements will be considered. The Barcode Scanner app can
-> no longer be published, so it's unlikely any changes will be accepted for it.
+> Only bug fixes and minor enhancements will be considered.
 > There is otherwise no active development or roadmap for this project. It is "DIY".
 
-### Runs on your favorite ECMAScript ecosystem
+### Attention
 
-> If it doesn't, we gonna make it.
+>NOTE: While we do not have the time to actively maintain zxing-js anymore, we are open to new maintainers taking the lead.
+
+
 
 ## What is ZXing?
 
@@ -25,16 +26,17 @@ Check out [STRICH](https://strich.io/) – Barcode Scanning for Web Apps.
 
 > See [Projects](https://github.com/zxing-js/library/projects) and [Milestones](https://github.com/zxing-js/library/milestones) for what is currently done and what's planned next. 👀
 
-| 1D product | 1D industrial                        | 2D                        |
-| ---------- |--------------------------------------|---------------------------|
-| UPC-A      | Code 39                              | QR Code                   |
-| UPC-E      | Code 93                              | Data Matrix               |
-| EAN-8      | Code 128                             | Aztec                     |
-| EAN-13     | Codabar                              | PDF 417                   |
-|            | ITF                                  | ~~MaxiCode~~              |
-|            | RSS-14                               | Micro-QR (needs testing!) |
-|            | RSS-Expanded (not production ready!) |                           |
 
+| 1D product | 1D industrial | 2D                                   |
+|:-----------|:--------------|:-------------------------------------|
+| UPC-A      | Code 39       | QR Code                              |
+| UPC-E      | Code 93       | Data Matrix                          |
+| EAN-8      | Code 128      | Aztec                                |
+| EAN-13     | Codabar       | PDF 417                              |
+|            | ITF           | MaxiCode (needs testing!)            |
+|            |               | RSS-14                               |
+|            |               | RSS-Expanded (not production ready!) |
+|            |               | Micro-QR (needs testing!)            |
 
 ## Status
 
@@ -49,9 +51,6 @@ Check out [STRICH](https://strich.io/) – Barcode Scanning for Web Apps.
 [![Maintainability](https://api.codeclimate.com/v1/badges/2b9c6ae92412ee8e15a9/maintainability)](https://codeclimate.com/github/zxing-js/library/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2b9c6ae92412ee8e15a9/test_coverage)](https://codeclimate.com/github/zxing-js/library/test_coverage)
 
-### Attention
-
->NOTE: While we do not have the time to actively maintain zxing-js anymore, we are open to new maintainers taking the lead.
 
 ## Demo
 
@@ -121,8 +120,6 @@ Special thanks to all the contributors who have contributed for this project. We
 And a special thanks to [@aleris][3] who created the project itself and made available the initial QR code port.
 
 ---
-
-[![Bless](https://cdn.rawgit.com/LunaGao/BlessYourCodeTag/master/tags/alpaca.svg)](http://lunagao.github.io/BlessYourCodeTag/)
 
 [0]: https://www.npmjs.com/package/@zxing/library
 [1]: https://github.com/zxing/zxing
