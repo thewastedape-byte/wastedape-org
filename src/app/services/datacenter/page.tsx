@@ -5,57 +5,44 @@ export default function DatacenterPage() {
   const bright = { color: '#F5F0E8', fontFamily: 'Georgia, serif' }
   const dim = { color: 'rgba(245,240,232,0.55)', fontFamily: 'Georgia, serif' }
   return (
-    <div style={{ background: '#1a1a1a', color: '#F5F0E8', minHeight: '100vh', padding: '2rem', fontFamily: 'Georgia, serif' }}>
-      <nav style={{ marginBottom: '3rem', display: 'flex', justifyContent: 'space-between' }}>
-        <span style={accent}>🦍 WastedApe</span>
-        <Link href="/services" style={{ color: '#C68B3A', textDecoration: 'none' }}>← All Services</Link>
-      </nav>
-      
-      <main style={{ maxWidth: '900px', margin: '0 auto' }}>
-        <h1 style={accent}>DATA CENTER AUDITS</h1>
+    <div style={{ background: '#1a1a1a', minHeight: '100vh', color: '#F5F0E8', padding: '2rem' }}>
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ marginBottom: '2rem', fontSize: '0.9rem' }}>
+          <span style={accent}>🦍 WastedApe</span> / Data Center
+          <br />
+          <Link href="/services" style={{ ...dim, textDecoration: 'underline' }}>← All Services</Link>
+        </div>
         
-        <p style={{ ...dim, fontSize: '1.2rem', marginTop: '0.5rem' }}>
-*Data Center Energy & Infrastructure Audits*
-        </p>
+        <div style={{ marginBottom: '3rem' }}>
+          <h1 style={{ ...bright, fontSize: '2.5rem', marginBottom: '1rem' }}>DATA CENTER AUDITS</h1>
+          <p style={dim}>Data Center Energy & Infrastructure Audits</p>
+        </div>
 
-        <p style={bright}>
-On-site and remote audits measuring PUE, WUE, cooling efficiency, and energy waste. Deliverable: written report with findings and recommendations.
-        </p>
-        
-        <section style={{ marginTop: '2rem' }}>
-          <h2 style={accent}>
-*WHAT WE AUDIT*
-          </h2>
-          
-          <ul style={dim}>
-            <li>• PUE (Power Usage Effectiveness) measurement</li>
-            <li>• WUE (Water Usage Effectiveness) analysis</li>
-            <li>• Heat and cooling system efficiency</li>
-            <li>• 12-month utility bill analysis</li>
-            <li>• Cooling tower CoC and water chemistry</li>
-            <li>• Electrical consumption vs. IT load</li>
+        <div style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
+          <p>On-site and remote audits measuring PUE, WUE, cooling efficiency, and energy waste. Deliverable: written report with findings and recommendations.</p>
+        </div>
+
+        <div style={{ marginBottom: '2rem', borderTop: '1px solid rgba(198, 139, 58, 0.3)', paddingTop: '1.5rem' }}>
+          <h2 style={{ ...accent, fontSize: '1.2rem', marginBottom: '1rem' }}>WHAT WE AUDIT</h2>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li style={{ marginBottom: '0.5rem' }}>• PUE (Power Usage Effectiveness) measurement</li>
+            <li style={{ marginBottom: '0.5rem' }}>• WUE (Water Usage Effectiveness) analysis</li>
+            <li style={{ marginBottom: '0.5rem' }}>• Heat and cooling system efficiency</li>
+            <li style={{ marginBottom: '0.5rem' }}>• 12-month utility bill analysis</li>
+            <li style={{ marginBottom: '0.5rem' }}>• Cooling tower CoC and water chemistry</li>
+            <li style={{ marginBottom: '0.5rem' }}>• Electrical consumption vs. IT load</li>
           </ul>
-        </section>
+        </div>
 
-        <section style={{ marginTop: '3rem', padding: '2rem', background: '#222', borderLeft: '4px solid #C68B3A' }}>
-          <h2 style={accent}>
-*Pricing*
-          </h2>
-          <p style={dim}>
-Register to see audit tiers from utility bill review to full on-site audit.
-          </p>
-          
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
-            <Link href="/register" style={{ padding: '0.75rem 1.5rem', background: '#C68B3A', color: '#000', textDecoration: 'none', fontWeight: 'bold' }}>
-              Register to See Pricing
-            </Link>
-            <Link href="/maximus/book" style={{ padding: '0.75rem 1.5rem', background: 'transparent', color: '#C68B3A', border: '1px solid #C68B3A', textDecoration: 'none', fontWeight: 'bold' }}>
-              Request an Audit
-            </Link>
+        <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(198, 139, 58, 0.3)', paddingTop: '1.5rem' }}>
+          <h2 style={{ ...accent, fontSize: '1.2rem', marginBottom: '1.5rem' }}>Pricing</h2>
+          <p style={dim}>Register to see audit tiers from utility bill review to full on-site audit.</p>
+          <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem' }}>
+            <Link href="/signup" style={{ ...accent, padding: '0.75rem 1.5rem', border: `1px solid ${accent.color}`, textDecoration: 'none', borderRadius: '4px' }}>Register to See Pricing</Link>
+            <Link href="/maximus/book" style={{ ...bright, padding: '0.75rem 1.5rem', background: accent.color, color: '#1a1a1a', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold' }}>Request an Audit</Link>
           </div>
-        </section>
-
-      </main>
+        </div>
+      </div>
     </div>
   )
 }

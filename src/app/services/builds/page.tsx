@@ -5,57 +5,44 @@ export default function BuildsPage() {
   const bright = { color: '#F5F0E8', fontFamily: 'Georgia, serif' }
   const dim = { color: 'rgba(245,240,232,0.55)', fontFamily: 'Georgia, serif' }
   return (
-    <div style={{ background: '#1a1a1a', color: '#F5F0E8', minHeight: '100vh', padding: '2rem', fontFamily: 'Georgia, serif' }}>
-      <nav style={{ marginBottom: '3rem', display: 'flex', justifyContent: 'space-between' }}>
-        <span style={accent}>🦍 WastedApe</span>
-        <Link href="/services" style={{ color: '#C68B3A', textDecoration: 'none' }}>← All Services</Link>
-      </nav>
-      
-      <main style={{ maxWidth: '900px', margin: '0 auto' }}>
-        <h1 style={accent}>APP & WEB DEVELOPMENT</h1>
+    <div style={{ background: '#1a1a1a', minHeight: '100vh', color: '#F5F0E8', padding: '2rem' }}>
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ marginBottom: '2rem', fontSize: '0.9rem' }}>
+          <span style={accent}>🦍 WastedApe</span> / Builds
+          <br />
+          <Link href="/services" style={{ ...dim, textDecoration: 'underline' }}>← All Services</Link>
+        </div>
         
-        <p style={{ ...dim, fontSize: '1.2rem', marginTop: '0.5rem' }}>
-*App & Website Development*
-        </p>
+        <div style={{ marginBottom: '3rem' }}>
+          <h1 style={{ ...bright, fontSize: '2.5rem', marginBottom: '1rem' }}>APP & WEB DEVELOPMENT</h1>
+          <p style={dim}>App & Website Development</p>
+        </div>
 
-        <p style={bright}>
-Full-stack web and mobile apps built on Next.js, React Native, Node.js, and Python. 10+ production deployments live.
-        </p>
-        
-        <section style={{ marginTop: '2rem' }}>
-          <h2 style={accent}>
-*WHAT WE BUILD*
-          </h2>
-          
-          <ul style={dim}>
-            <li>• Web applications (Next.js, React)</li>
-            <li>• Mobile apps (React Native / Expo)</li>
-            <li>• Backend APIs and integrations</li>
-            <li>• Stripe payment integration</li>
-            <li>• Database design and cloud deployment</li>
-            <li>• Ongoing maintenance and hosting management</li>
+        <div style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
+          <p>Full-stack web and mobile apps built on Next.js, React Native, Node.js, and Python. 10+ production deployments live.</p>
+        </div>
+
+        <div style={{ marginBottom: '2rem', borderTop: '1px solid rgba(198, 139, 58, 0.3)', paddingTop: '1.5rem' }}>
+          <h2 style={{ ...accent, fontSize: '1.2rem', marginBottom: '1rem' }}>WHAT WE BUILD</h2>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li style={{ marginBottom: '0.5rem' }}>• Web applications (Next.js, React)</li>
+            <li style={{ marginBottom: '0.5rem' }}>• Mobile apps (React Native / Expo)</li>
+            <li style={{ marginBottom: '0.5rem' }}>• Backend APIs and integrations</li>
+            <li style={{ marginBottom: '0.5rem' }}>• Stripe payment integration</li>
+            <li style={{ marginBottom: '0.5rem' }}>• Database design and cloud deployment</li>
+            <li style={{ marginBottom: '0.5rem' }}>• Ongoing maintenance and hosting management</li>
           </ul>
-        </section>
+        </div>
 
-        <section style={{ marginTop: '3rem', padding: '2rem', background: '#222', borderLeft: '4px solid #C68B3A' }}>
-          <h2 style={accent}>
-*Pricing*
-          </h2>
-          <p style={dim}>
-Register to see pricing. Simple site to full app — we scope it right.
-          </p>
-          
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
-            <Link href="/register" style={{ padding: '0.75rem 1.5rem', background: '#C68B3A', color: '#000', textDecoration: 'none', fontWeight: 'bold' }}>
-              Register to See Pricing
-            </Link>
-            <Link href="/maximus/book" style={{ padding: '0.75rem 1.5rem', background: 'transparent', color: '#C68B3A', border: '1px solid #C68B3A', textDecoration: 'none', fontWeight: 'bold' }}>
-              Tell Us What You&apos;re Building
-            </Link>
+        <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(198, 139, 58, 0.3)', paddingTop: '1.5rem' }}>
+          <h2 style={{ ...accent, fontSize: '1.2rem', marginBottom: '1.5rem' }}>Pricing</h2>
+          <p style={dim}>Register to see pricing. Simple site to full app — we scope it right.</p>
+          <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem' }}>
+            <Link href="/signup" style={{ ...accent, padding: '0.75rem 1.5rem', border: `1px solid ${accent.color}`, textDecoration: 'none', borderRadius: '4px' }}>Register to See Pricing</Link>
+            <Link href="/maximus/book" style={{ ...bright, padding: '0.75rem 1.5rem', background: accent.color, color: '#1a1a1a', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold' }}>Tell Us What You&apos;re Building</Link>
           </div>
-        </section>
-
-      </main>
+        </div>
+      </div>
     </div>
   )
 }

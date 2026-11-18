@@ -5,57 +5,44 @@ export default function EngineeringPage() {
   const bright = { color: '#F5F0E8', fontFamily: 'Georgia, serif' }
   const dim = { color: 'rgba(245,240,232,0.55)', fontFamily: 'Georgia, serif' }
   return (
-    <div style={{ background: '#1a1a1a', color: '#F5F0E8', minHeight: '100vh', padding: '2rem', fontFamily: 'Georgia, serif' }}>
-      <nav style={{ marginBottom: '3rem', display: 'flex', justifyContent: 'space-between' }}>
-        <span style={accent}>🦍 WastedApe</span>
-        <Link href="/services" style={{ color: '#C68B3A', textDecoration: 'none' }}>← All Services</Link>
-      </nav>
-      
-      <main style={{ maxWidth: '900px', margin: '0 auto' }}>
-        <h1 style={accent}>ENGINEERING</h1>
+    <div style={{ background: '#1a1a1a', minHeight: '100vh', color: '#F5F0E8', padding: '2rem' }}>
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ marginBottom: '2rem', fontSize: '0.9rem' }}>
+          <span style={accent}>🦍 WastedApe</span> / Engineering
+          <br />
+          <Link href="/services" style={{ ...dim, textDecoration: 'underline' }}>← All Services</Link>
+        </div>
         
-        <p style={{ ...dim, fontSize: '1.2rem', marginTop: '0.5rem' }}>
-*Electrical, SCADA & PLC Engineering*
-        </p>
+        <div style={{ marginBottom: '3rem' }}>
+          <h1 style={{ ...bright, fontSize: '2.5rem', marginBottom: '1rem' }}>ENGINEERING</h1>
+          <p style={dim}>Electrical, SCADA & PLC Engineering</p>
+        </div>
 
-        <p style={bright}>
-Engineering consulting for electrical systems, SCADA architecture, and PLC system design. Project-based engagements funded by client deposit.
-        </p>
-        
-        <section style={{ marginTop: '2rem' }}>
-          <h2 style={accent}>
-*WHAT WE DO*
-          </h2>
-          
-          <ul style={dim}>
-            <li>• Electrical engineering consulting and system design</li>
-            <li>• SCADA architecture and HMI design</li>
-            <li>• Control narrative and functional spec development</li>
-            <li>• 480V 3-phase power system consulting</li>
-            <li>• OT/IT convergence planning</li>
-            <li>• Engineering drawing review and redline</li>
+        <div style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
+          <p>Engineering consulting for electrical systems, SCADA architecture, and PLC system design. Project-based engagements funded by client deposit.</p>
+        </div>
+
+        <div style={{ marginBottom: '2rem', borderTop: '1px solid rgba(198, 139, 58, 0.3)', paddingTop: '1.5rem' }}>
+          <h2 style={{ ...accent, fontSize: '1.2rem', marginBottom: '1rem' }}>WHAT WE DO</h2>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li style={{ marginBottom: '0.5rem' }}>• Electrical engineering consulting and system design</li>
+            <li style={{ marginBottom: '0.5rem' }}>• SCADA architecture and HMI design</li>
+            <li style={{ marginBottom: '0.5rem' }}>• Control narrative and functional spec development</li>
+            <li style={{ marginBottom: '0.5rem' }}>• 480V 3-phase power system consulting</li>
+            <li style={{ marginBottom: '0.5rem' }}>• OT/IT convergence planning</li>
+            <li style={{ marginBottom: '0.5rem' }}>• Engineering drawing review and redline</li>
           </ul>
-        </section>
+        </div>
 
-        <section style={{ marginTop: '3rem', padding: '2rem', background: '#222', borderLeft: '4px solid #C68B3A' }}>
-          <h2 style={accent}>
-*Deposit-Based Engagement*
-          </h2>
-          <p style={dim}>
-Engineering projects are scoped and funded via deposit. Contact us to discuss your needs.
-          </p>
-          
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
-            <Link href="/register" style={{ padding: '0.75rem 1.5rem', background: '#C68B3A', color: '#000', textDecoration: 'none', fontWeight: 'bold' }}>
-              Register to See Pricing
-            </Link>
-            <Link href="/maximus/book" style={{ padding: '0.75rem 1.5rem', background: 'transparent', color: '#C68B3A', border: '1px solid #C68B3A', textDecoration: 'none', fontWeight: 'bold' }}>
-              Contact for Deposit-Based Engagement
-            </Link>
+        <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(198, 139, 58, 0.3)', paddingTop: '1.5rem' }}>
+          <h2 style={{ ...accent, fontSize: '1.2rem', marginBottom: '1.5rem' }}>Deposit-Based Engagement</h2>
+          <p style={dim}>Engineering projects are scoped and funded via deposit. Contact us to discuss your needs.</p>
+          <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem' }}>
+            <Link href="/signup" style={{ ...accent, padding: '0.75rem 1.5rem', border: `1px solid ${accent.color}`, textDecoration: 'none', borderRadius: '4px' }}>Register to See Pricing</Link>
+            <Link href="/maximus/book" style={{ ...bright, padding: '0.75rem 1.5rem', background: accent.color, color: '#1a1a1a', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold' }}>Contact for Deposit-Based Engagement</Link>
           </div>
-        </section>
-
-      </main>
+        </div>
+      </div>
     </div>
   )
 }
