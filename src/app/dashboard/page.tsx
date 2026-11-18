@@ -5,181 +5,157 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
 export default function DashboardPage() {
-  const { user, authenticated, loading, logout, email } = useAuth()
+  const { user, loading } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
-    if (!loading && !authenticated) {
-      router.push('/login')
+    if (!loading && !user) {
+      router.push('/register')
     }
-  }, [authenticated, loading, router])
+  }, [loading, user, router])
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
         <div className="text-white text-xl">Loading...</div>
       </div>
     )
   }
 
-  if (!authenticated) {
+  if (!user) {
     return null
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="flex justify-between items-start mb-12">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
+      {/* Header */}
+      <div className="bg-gray-800 border-b border-gray-700">
+        <div className="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">Welcome</h1>
-            <p className="text-slate-400 text-lg">{email}</p>
+            <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+            <p className="text-gray-400 mt-1">Welcome, {user.email}</p>
           </div>
-          <button
-            onClick={logout}
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg transition"
-          >
-            Sign Out
-          </button>
+          <LogoutButton />
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        {/* Welcome Section */}
+        <div className="mb-12 p-8 bg-gray-800 rounded-lg border border-gray-700">
+          <h2 className="text-2xl font-bold text-white mb-3">Welcome to Wasted Ape</h2>
+          <p className="text-gray-300">
+            You're now authenticated and can access our exclusive services and content.
+          </p>
         </div>
 
         {/* Service Pricing Cards */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-white mb-6">Our Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Web Development */}
-            <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition">
-              <div className="bg-blue-600 p-6">
-                <h3 className="text-xl font-bold text-white mb-2">Web Development</h3>
-                <p className="text-blue-100 text-sm">Custom web applications & sites</p>
-              </div>
-              <div className="p-6">
-                <div className="mb-4">
-                  <span className="text-3xl font-bold text-slate-900">Custom</span>
-                  <p className="text-slate-600">Based on project scope</p>
-                </div>
-                <ul className="space-y-3 mb-6 text-slate-700 text-sm">
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span>React, Next.js, TypeScript</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span>Database design & optimization</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span>SEO & performance tuning</span>
-                  </li>
+            {[
+              {
+                title: 'Web Development',
+                price: '$2,500 - $5,000',
+                description: 'Custom websites and web applications built with modern technologies.',
+                features: ['Responsive Design', 'SEO Optimized', 'Fast Performance', 'Secure & Scalable'],
+              },
+              {
+                title: 'Mobile Apps',
+                price: '$5,000 - $15,000',
+                description: 'Native and cross-platform mobile applications for iOS and Android.',
+                features: ['User-Friendly', 'Push Notifications', 'Offline Mode', 'App Store Ready'],
+              },
+              {
+                title: 'Consulting',
+                price: 'Custom',
+                description: 'Expert advice and strategy for your digital transformation journey.',
+                features: ['Technical Audit', 'Architecture Design', 'Team Mentoring', 'Growth Strategy'],
+              },
+            ].map((service, index) => (
+              <div key={index} className="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-blue-500 transition">
+                <h3 className="text-xl font-bold text-white mb-2">{service.title}</h3>
+                <p className="text-blue-400 text-2xl font-bold mb-3">{service.price}</p>
+                <p className="text-gray-400 mb-4">{service.description}</p>
+                <ul className="space-y-2 mb-6">
+                  {service.features.map((feature, i) => (
+                    <li key={i} className="text-gray-300 text-sm flex items-center">
+                      <span className="text-blue-400 mr-2">✓</span> {feature}
+                    </li>
+                  ))}
                 </ul>
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition">
-                  Get a Quote
+                <button className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition">
+                  Learn More
                 </button>
               </div>
-            </div>
-
-            {/* Mobile Development */}
-            <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition">
-              <div className="bg-purple-600 p-6">
-                <h3 className="text-xl font-bold text-white mb-2">Mobile Development</h3>
-                <p className="text-purple-100 text-sm">iOS & Android native apps</p>
-              </div>
-              <div className="p-6">
-                <div className="mb-4">
-                  <span className="text-3xl font-bold text-slate-900">Custom</span>
-                  <p className="text-slate-600">Based on platform needs</p>
-                </div>
-                <ul className="space-y-3 mb-6 text-slate-700 text-sm">
-                  <li className="flex items-start">
-                    <span className="text-purple-600 mr-2">✓</span>
-                    <span>Native & cross-platform</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-purple-600 mr-2">✓</span>
-                    <span>App store optimization</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-purple-600 mr-2">✓</span>
-                    <span>Push notifications & analytics</span>
-                  </li>
-                </ul>
-                <button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded-lg transition">
-                  Get a Quote
-                </button>
-              </div>
-            </div>
-
-            {/* Design Services */}
-            <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition">
-              <div className="bg-pink-600 p-6">
-                <h3 className="text-xl font-bold text-white mb-2">Design Services</h3>
-                <p className="text-pink-100 text-sm">UI/UX & branding</p>
-              </div>
-              <div className="p-6">
-                <div className="mb-4">
-                  <span className="text-3xl font-bold text-slate-900">Custom</span>
-                  <p className="text-slate-600">Tailored to your brand</p>
-                </div>
-                <ul className="space-y-3 mb-6 text-slate-700 text-sm">
-                  <li className="flex items-start">
-                    <span className="text-pink-600 mr-2">✓</span>
-                    <span>Brand identity & guidelines</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-pink-600 mr-2">✓</span>
-                    <span>Figma prototypes & user flows</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-pink-600 mr-2">✓</span>
-                    <span>Responsive design systems</span>
-                  </li>
-                </ul>
-                <button className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 rounded-lg transition">
-                  Get a Quote
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
-        {/* Downloads & Consultation */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Guides Download */}
-          <div className="bg-white rounded-lg shadow-xl p-8">
-            <h3 className="text-xl font-bold text-slate-900 mb-4">Free Resources</h3>
-            <p className="text-slate-600 mb-6">Download our guides & case studies</p>
-            <div className="space-y-3">
-              <a
-                href="#"
-                className="block bg-slate-100 hover:bg-slate-200 p-4 rounded-lg transition font-medium text-slate-900"
-              >
-                📄 Web Development Guide
-              </a>
-              <a
-                href="#"
-                className="block bg-slate-100 hover:bg-slate-200 p-4 rounded-lg transition font-medium text-slate-900"
-              >
-                📄 Mobile Strategy Handbook
-              </a>
-              <a
-                href="#"
-                className="block bg-slate-100 hover:bg-slate-200 p-4 rounded-lg transition font-medium text-slate-900"
-              >
-                📄 Design Best Practices
-              </a>
-            </div>
+        {/* Book Consultation */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-white mb-6">Next Steps</h2>
+          <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-lg p-8">
+            <h3 className="text-xl font-bold text-white mb-3">Ready to Get Started?</h3>
+            <p className="text-gray-300 mb-6">
+              Schedule a consultation with our team to discuss your project and get a custom quote.
+            </p>
+            <a
+              href="/maximus/book"
+              className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition"
+            >
+              Book a Consultation
+            </a>
           </div>
+        </div>
 
-          {/* Book Consultation */}
-          <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg shadow-xl p-8">
-            <h3 className="text-xl font-bold text-white mb-4">Book a Consultation</h3>
-            <p className="text-blue-100 mb-6">Schedule a free 30-minute call with our team</p>
-            <button className="w-full bg-white hover:bg-slate-100 text-blue-600 font-semibold py-3 rounded-lg transition">
-              Schedule Now
-            </button>
+        {/* Downloads Section */}
+        <div>
+          <h2 className="text-2xl font-bold text-white mb-6">Download Guides</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                title: 'Web Development Guide',
+                description: 'Everything you need to know about modern web development.',
+                icon: '📄',
+              },
+              {
+                title: 'Mobile Strategy Guide',
+                description: 'How to plan and execute a successful mobile app project.',
+                icon: '📱',
+              },
+            ].map((guide, index) => (
+              <div key={index} className="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-blue-500 transition">
+                <div className="text-3xl mb-3">{guide.icon}</div>
+                <h3 className="text-lg font-bold text-white mb-2">{guide.title}</h3>
+                <p className="text-gray-400 mb-4">{guide.description}</p>
+                <button className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition text-sm">
+                  Download PDF
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
+  )
+}
+
+function LogoutButton() {
+  const { logout } = useAuth()
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    await logout()
+    router.push('/')
+  }
+
+  return (
+    <button
+      onClick={handleLogout}
+      className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition"
+    >
+      Logout
+    </button>
   )
 }
