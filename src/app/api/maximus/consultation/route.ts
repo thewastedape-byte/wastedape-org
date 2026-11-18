@@ -59,7 +59,7 @@ ${company ? `<p><strong>Company:</strong> ${company}</p>` : ''}
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'noreply@wastedape.org',
+        from: 'onboarding@resend.dev',
         to: 'thewastedape@gmail.com',
         subject: `New Consultation Request from ${name}`,
         html: emailContent,
