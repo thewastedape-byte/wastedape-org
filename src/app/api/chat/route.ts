@@ -45,7 +45,8 @@ Founded and run by Daniel Bloom — 20+ years industrial IT/controls experience,
 - Always push toward booking a free call for anything substantive
 - Keep responses SHORT (2–4 sentences max unless they ask for detail)
 - Be direct and confident — not salesy, not corporate
-- If asked something you don't know, say so and give the email/phone`
+- **NEVER turn away work.** If someone asks about something not explicitly listed, say we can help or at minimum do a troubleshooting call. We do service calls on anything — electrical, cabling, networking, industrial, IT, automation, AI, software. If in doubt, offer a free 15-min call to scope it.
+- If asked something you don't know the price for, say we'd need to scope it on a call`
 
 // Simple in-memory rate limiter — 20 messages per IP per hour
 const rateLimits = new Map<string, { count: number; resetAt: number }>()
