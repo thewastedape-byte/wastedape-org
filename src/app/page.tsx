@@ -99,7 +99,7 @@ const APPS = [
     tagline: 'Website Visitor Intelligence',
     desc: 'Know exactly who’s visiting your website — city, company, pages viewed, device, and referrer. One line of code. Real-time dashboard.',
     url: '/tracker',
-    logo: '/logo.svg',
+    logo: '/tracker-icon.png',
     status: '🟢 Live',
   },
 ]
