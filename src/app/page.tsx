@@ -51,6 +51,22 @@ const SERVICES = [
     link: '/services/builds',
     image: '/service-builds.png',
   },
+  {
+    name: 'Physical Security & Surveillance',
+    price: 'Quote-based',
+    desc: 'Subcontract installation and service for commercial alarm systems, CCTV, access control, and security infrastructure. Nationwide.',
+    link: '/services/security',
+    image: null,
+    icon: '🛡️',
+  },
+  {
+    name: 'IT Support & Infrastructure',
+    price: '$75–$125/hr',
+    desc: 'From basic helpdesk and workstation setup to expert-level networking, server builds, structured cabling, and enterprise IT infrastructure.',
+    link: '/services/it-audit',
+    image: null,
+    icon: '💻',
+  },
 ]
 
 const APPS = [

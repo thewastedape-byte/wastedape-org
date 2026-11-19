@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+export const runtime = 'nodejs'
+
+const SUPABASE_URL = 'https://yruuzkxpnbgruwuivchy.supabase.co'
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || 'eyJhbG…_qkE'
+
 interface ConsultationRequest {
   name: string
   email: string
@@ -74,6 +79,22 @@ ${company ? `<p><strong>Company:</strong> ${company}</p>` : ''}
         { error: 'Failed to send email.' },
         { status: 500 }
       )
+    }
+
+    // Save to Supabase
+    try {
+      await fetch(`${SUPABASE_URL}/rest/v1/consultations`, {
+        method: 'POST',
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json',
+          Prefer: 'return=minimal'
+        },
+        body: JSON.stringify({ name, email, company: company || null, challenge, timeline, status: 'new', submitted_at: new Date().toISOString() })
+      })
+    } catch (dbErr) {
+      console.error('Supabase insert error:', dbErr)
     }
 
     return NextResponse.json({ success: true }, { status: 200 })
