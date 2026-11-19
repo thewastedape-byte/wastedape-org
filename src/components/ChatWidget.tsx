@@ -78,9 +78,9 @@ export default function ChatWidget() {
           width: 'min(380px, calc(100vw - 40px))',
           height: 'min(520px, calc(100vh - 140px))',
           background: bg,
-          border: `1px solid ${border}`,
+          border: `2px solid ${gold}`,
           borderRadius: '16px',
-          boxShadow: '0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,146,42,0.1)',
+          boxShadow: '0 24px 64px rgba(0,0,0,0.8), 0 0 0 1px rgba(200,146,42,0.5), 0 0 30px rgba(200,146,42,0.2)',
           display: 'flex', flexDirection: 'column',
           fontFamily: 'Georgia, serif',
           overflow: 'hidden'
