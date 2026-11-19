@@ -6,8 +6,6 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400&display=swap');
-
   body {
     background: #111;
     display: flex;
@@ -15,117 +13,128 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    gap: 40px;
+    gap: 36px;
     font-family: Georgia, serif;
-    padding: 40px;
+    padding: 48px 24px;
   }
 
   .label {
-    color: rgba(200,146,42,0.5);
-    font-size: 11px;
+    color: rgba(200,146,42,0.45);
+    font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
   }
 
-  /* ============================================
-     CARD — 3.5in × 2in = 1050px × 600px @ 300dpi
-     Screen display: 700px × 400px
-  ============================================ */
+  /* 3.5in × 2in — displayed at 700×400 */
   .card {
     width: 700px;
     height: 400px;
-    border-radius: 18px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 0 1px rgba(200,146,42,0.35);
     position: relative;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 0 1px rgba(200,146,42,0.3);
   }
 
-  /* ——— FRONT ——— */
+  /* ===================== FRONT ===================== */
   .front {
-    background: #0a0806;
     display: flex;
-    align-items: stretch;
-  }
-
-  .front-left {
-    width: 220px;
-    background: linear-gradient(160deg, #121008 0%, #0a0806 100%);
-    border-right: 1px solid rgba(200,146,42,0.25);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 32px 24px;
-    flex-shrink: 0;
-  }
-
-  .logo-ring {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 2px solid rgba(200,146,42,0.65);
-    box-shadow: 0 0 20px rgba(200,146,42,0.25), inset 0 0 20px rgba(0,0,0,0.5);
-    overflow: hidden;
     background: #080604;
   }
 
-  .logo-ring img {
+  /* Left — banner image */
+  .banner {
+    width: 240px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center top;
+    filter: brightness(0.75) saturate(0.9);
   }
 
-  .brand-label {
-    text-align: center;
+  /* Fade from image to dark on the right */
+  .banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 40%, #080604 100%);
   }
 
-  .brand-label p {
-    color: rgba(200,146,42,0.55);
-    font-size: 8px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    line-height: 1.6;
+  /* Gold top-left corner accent */
+  .banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 36px; height: 36px;
+    border-top: 2px solid rgba(200,146,42,0.7);
+    border-left: 2px solid rgba(200,146,42,0.7);
+    border-radius: 16px 0 0 0;
+    z-index: 2;
   }
 
-  .front-right {
+  /* Right — info panel */
+  .info {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 36px 40px;
+    padding: 32px 36px 32px 24px;
     position: relative;
   }
 
-  /* Subtle radial glow */
-  .front-right::before {
+  /* Gold bottom-right corner accent */
+  .info::after {
     content: '';
     position: absolute;
-    top: -60px; right: -60px;
-    width: 280px; height: 280px;
+    bottom: 0; right: 0;
+    width: 36px; height: 36px;
+    border-bottom: 2px solid rgba(200,146,42,0.7);
+    border-right: 2px solid rgba(200,146,42,0.7);
+    border-radius: 0 0 16px 0;
+  }
+
+  /* Subtle glow */
+  .info::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,146,42,0.07) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(200,146,42,0.06) 0%, transparent 70%);
     pointer-events: none;
   }
 
   .name-block h1 {
     color: #F5F0E8;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     line-height: 1;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
 
-  .name-block .title {
+  .title-line {
     color: #C8922A;
-    font-size: 10px;
-    letter-spacing: 2.5px;
+    font-size: 9.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .company-line {
+    color: rgba(200,146,42,0.45);
+    font-size: 8px;
+    letter-spacing: 2px;
     text-transform: uppercase;
   }
 
   .divider {
-    width: 60px;
+    width: 50px;
     height: 1px;
     background: linear-gradient(to right, rgba(200,146,42,0.6), transparent);
     margin: 12px 0;
@@ -134,7 +143,7 @@
   .contact-block {
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    gap: 8px;
   }
 
   .contact-row {
@@ -143,52 +152,41 @@
     gap: 10px;
   }
 
-  .contact-icon {
+  .icon {
     color: #C8922A;
-    font-size: 13px;
-    width: 18px;
+    font-size: 12px;
+    width: 16px;
     text-align: center;
     flex-shrink: 0;
   }
 
-  .contact-row span {
+  .contact-row .text {
     color: #F5F0E8;
-    font-size: 13.5px;
+    font-size: 13px;
     letter-spacing: 0.3px;
   }
 
-  .contact-row .accent {
-    color: #C8922A;
+  .contact-row .badge {
+    color: rgba(200,146,42,0.55);
+    font-size: 8.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-left: 4px;
+  }
+
+  .accent-text {
+    color: #C8922A !important;
     font-weight: bold;
   }
 
-  /* Gold corner accent */
-  .corner-tl {
-    position: absolute;
-    top: 0; left: 0;
-    width: 40px; height: 40px;
-    border-top: 2px solid rgba(200,146,42,0.5);
-    border-left: 2px solid rgba(200,146,42,0.5);
-    border-radius: 18px 0 0 0;
-  }
-  .corner-br {
-    position: absolute;
-    bottom: 0; right: 0;
-    width: 40px; height: 40px;
-    border-bottom: 2px solid rgba(200,146,42,0.5);
-    border-right: 2px solid rgba(200,146,42,0.5);
-    border-radius: 0 0 18px 0;
-  }
-
-
-  /* ——— BACK ——— */
+  /* ===================== BACK ===================== */
   .back {
-    background: linear-gradient(160deg, #0d0b09 0%, #0a0806 60%, #0f0d0b 100%);
+    background: linear-gradient(160deg, #0d0a07 0%, #080604 60%, #0f0d0a 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 14px;
+    gap: 12px;
     position: relative;
   }
 
@@ -199,50 +197,44 @@
     background: radial-gradient(ellipse at center, rgba(200,146,42,0.08) 0%, transparent 65%);
   }
 
-  /* Concentric circle accents */
-  .back::after {
-    content: '';
+  .back-ring {
     position: absolute;
     width: 320px; height: 320px;
     border-radius: 50%;
-    border: 1px solid rgba(200,146,42,0.07);
+    border: 1px solid rgba(200,146,42,0.06);
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
   }
 
   .back-logo {
-    width: 72px;
-    height: 72px;
+    width: 68px;
+    height: 68px;
     border-radius: 50%;
     border: 2px solid rgba(200,146,42,0.55);
-    box-shadow: 0 0 24px rgba(200,146,42,0.2);
+    box-shadow: 0 0 20px rgba(200,146,42,0.2);
     overflow: hidden;
     position: relative; z-index: 1;
   }
 
-  .back-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  .back-logo img { width: 100%; height: 100%; object-fit: cover; }
 
-  .back-name {
+  .back-co {
     text-align: center;
     position: relative; z-index: 1;
   }
 
-  .back-name .company {
+  .back-co .co-name {
     color: #C8922A;
-    font-size: 15px;
+    font-size: 14px;
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: bold;
   }
 
-  .back-name .sub {
-    color: rgba(245,240,232,0.35);
-    font-size: 8px;
-    letter-spacing: 3px;
+  .back-co .co-sub {
+    color: rgba(245,240,232,0.3);
+    font-size: 7.5px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
     margin-top: 4px;
   }
@@ -250,100 +242,87 @@
   .back-services {
     text-align: center;
     position: relative; z-index: 1;
-    margin-top: 4px;
+    margin-top: 2px;
   }
 
   .back-services p {
-    color: rgba(200,146,42,0.4);
-    font-size: 9px;
-    letter-spacing: 2px;
+    color: rgba(200,146,42,0.38);
+    font-size: 8.5px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    line-height: 1.8;
+    line-height: 1.9;
   }
 
   .back-url {
-    color: rgba(245,240,232,0.25);
-    font-size: 9px;
+    color: rgba(245,240,232,0.2);
+    font-size: 8.5px;
     letter-spacing: 2px;
     position: relative; z-index: 1;
-    margin-top: 4px;
   }
 
-  /* ——— Print ——— */
   @media print {
-    body {
-      background: white;
-      gap: 0.25in;
-      padding: 0.25in;
-    }
-    .card {
-      width: 3.5in;
-      height: 2in;
-      border-radius: 0.1in;
-      page-break-inside: avoid;
-    }
-    .label { display: none; }
-    .hint { display: none; }
+    body { background: white; gap: 0.2in; padding: 0.2in; }
+    .card { width: 3.5in; height: 2in; border-radius: 0.1in; page-break-inside: avoid; }
+    .label, .hint { display: none; }
   }
 </style>
 </head>
 <body>
 
-<p class="label">Front</p>
+<p class="label">— Front —</p>
 
 <div class="card front">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
 
-  <!-- Left panel -->
-  <div class="front-left">
-    <div class="logo-ring">
-      <img src="https://wastedape.org/logo.svg" alt="WastedApe Tech" />
-    </div>
-    <div class="brand-label">
-      <p>The Wasted Ape</p>
-      <p>Tech Solutions</p>
-    </div>
+  <!-- Left: Banner image (gorilla climbing) -->
+  <div class="banner">
+    <img src="https://wastedape.org/background.png" alt="" />
   </div>
 
-  <!-- Right panel -->
-  <div class="front-right">
+  <!-- Right: Info -->
+  <div class="info">
     <div class="name-block">
+      <p class="company-line">WastedApe Tech Solutions</p>
       <h1>Daniel Bloom</h1>
-      <p class="title">Founder &amp; Technical Principal</p>
+      <p class="title-line">Founder &amp; Technical Principal</p>
       <div class="divider"></div>
     </div>
 
     <div class="contact-block">
       <div class="contact-row">
-        <span class="contact-icon">📞</span>
-        <span class="accent">(272) APE-DUDE</span>
+        <span class="icon">📞</span>
+        <span class="text accent-text">(272) APE-DUDE</span>
+        <span class="badge">Office</span>
       </div>
       <div class="contact-row">
-        <span class="contact-icon">✉</span>
-        <span>thewastedape@gmail.com</span>
+        <span class="icon">📱</span>
+        <span class="text">(330) 419-9283</span>
+        <span class="badge">Cell</span>
       </div>
       <div class="contact-row">
-        <span class="contact-icon">🌐</span>
-        <span class="accent">wastedape.org</span>
+        <span class="icon">✉</span>
+        <span class="text">thewastedape@gmail.com</span>
+      </div>
+      <div class="contact-row">
+        <span class="icon">🌐</span>
+        <span class="text accent-text">wastedape.org</span>
       </div>
     </div>
   </div>
+
 </div>
 
-<p class="label">Back</p>
+<p class="label">— Back —</p>
 
 <div class="card back">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
+  <div class="back-ring"></div>
 
   <div class="back-logo">
     <img src="https://wastedape.org/logo.svg" alt="WastedApe Tech" />
   </div>
 
-  <div class="back-name">
-    <p class="company">WastedApe Tech</p>
-    <p class="sub">Technology Solutions · Veteran Owned</p>
+  <div class="back-co">
+    <p class="co-name">WastedApe Tech</p>
+    <p class="co-sub">Technology Solutions &nbsp;·&nbsp; Veteran Owned</p>
   </div>
 
   <div class="back-services">
@@ -354,8 +333,8 @@
   <p class="back-url">wastedape.org</p>
 </div>
 
-<p class="hint" style="color:rgba(200,146,42,0.3);font-size:11px;letter-spacing:2px;font-family:Georgia,serif;">
-  CTRL+P TO PRINT &nbsp;·&nbsp; SET TO 3.5" × 2" IN PRINTER
+<p class="hint" style="color:rgba(200,146,42,0.3);font-size:10px;letter-spacing:2px;font-family:Georgia,serif;">
+  CTRL+P TO PRINT &nbsp;·&nbsp; SET PAPER TO 3.5" × 2"
 </p>
 
 </body>
