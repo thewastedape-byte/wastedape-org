@@ -90,7 +90,7 @@ const APPS = [
     name: 'Fret Buddy',
     tagline: 'AI Guitar Teacher',
     desc: 'Learn guitar with an AI instructor that adapts to your level. Chords, scales, songs, and real-time feedback.',
-    url: 'https://fretbuddy.thewastedape.com',
+    url: 'https://fret-buddy-web.onrender.com',
     logo: '/fret-buddy-logo.png',
     status: '🟢 Live',
   },
