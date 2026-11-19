@@ -5,7 +5,6 @@
 <title>WastedApe Tech — Business Card</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     background: #111;
     display: flex;
@@ -17,7 +16,6 @@
     font-family: Georgia, serif;
     padding: 48px 24px;
   }
-
   .label {
     color: rgba(200,146,42,0.45);
     font-size: 10px;
@@ -25,161 +23,179 @@
     text-transform: uppercase;
   }
 
-  /* 3.5in × 2in — displayed at 700×400 */
+  /* 3.5in × 2in displayed at 700×400 */
   .card {
     width: 700px;
     height: 400px;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 0 1px rgba(200,146,42,0.35);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 0 1px rgba(200,146,42,0.4);
     position: relative;
   }
 
-  /* ===================== FRONT ===================== */
+  /* ============= FRONT ============= */
   .front {
-    display: flex;
     background: #080604;
-  }
-
-  /* Left — banner image */
-  .banner {
-    width: 240px;
-    flex-shrink: 0;
+    display: flex;
+    align-items: stretch;
     position: relative;
-    overflow: hidden;
   }
 
-  .banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    filter: brightness(0.75) saturate(0.9);
-  }
-
-  /* Fade from image to dark on the right */
-  .banner::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, transparent 40%, #080604 100%);
-  }
-
-  /* Gold top-left corner accent */
-  .banner::before {
+  /* Gold corner accents */
+  .front::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
     width: 36px; height: 36px;
-    border-top: 2px solid rgba(200,146,42,0.7);
-    border-left: 2px solid rgba(200,146,42,0.7);
+    border-top: 2px solid rgba(200,146,42,0.65);
+    border-left: 2px solid rgba(200,146,42,0.65);
     border-radius: 16px 0 0 0;
+    z-index: 10;
+  }
+  .front::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 36px; height: 36px;
+    border-bottom: 2px solid rgba(200,146,42,0.65);
+    border-left: 2px solid rgba(200,146,42,0.65);
+    border-radius: 0 0 0 16px;
+    z-index: 10;
+  }
+
+  /* Left — round logo + company */
+  .left-col {
+    width: 170px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 28px 20px;
+    border-right: 1px solid rgba(200,146,42,0.18);
+    position: relative;
     z-index: 2;
   }
 
-  /* Right — info panel */
-  .info {
+  .logo-ring {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 2px solid rgba(200,146,42,0.65);
+    box-shadow: 0 0 20px rgba(200,146,42,0.25);
+    overflow: hidden;
+    background: #060402;
+  }
+  .logo-ring img { width: 100%; height: 100%; object-fit: cover; }
+
+  .co-label { text-align: center; }
+  .co-label p {
+    color: rgba(200,146,42,0.5);
+    font-size: 7.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.7;
+  }
+
+  /* Center — info */
+  .center-col {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 32px 36px 32px 24px;
+    padding: 28px 20px 28px 24px;
     position: relative;
-  }
-
-  /* Gold bottom-right corner accent */
-  .info::after {
-    content: '';
-    position: absolute;
-    bottom: 0; right: 0;
-    width: 36px; height: 36px;
-    border-bottom: 2px solid rgba(200,146,42,0.7);
-    border-right: 2px solid rgba(200,146,42,0.7);
-    border-radius: 0 0 16px 0;
-  }
-
-  /* Subtle glow */
-  .info::before {
-    content: '';
-    position: absolute;
-    top: -80px; right: -80px;
-    width: 300px; height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,146,42,0.06) 0%, transparent 70%);
-    pointer-events: none;
+    z-index: 2;
   }
 
   .name-block h1 {
     color: #F5F0E8;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: bold;
     letter-spacing: 0.5px;
     line-height: 1;
     margin-bottom: 5px;
   }
-
-  .title-line {
+  .name-block .title {
     color: #C8922A;
-    font-size: 9.5px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .company-line {
-    color: rgba(200,146,42,0.45);
-    font-size: 8px;
+    font-size: 8.5px;
     letter-spacing: 2px;
     text-transform: uppercase;
   }
-
   .divider {
-    width: 50px;
+    width: 44px;
     height: 1px;
     background: linear-gradient(to right, rgba(200,146,42,0.6), transparent);
-    margin: 12px 0;
+    margin: 10px 0;
   }
 
-  .contact-block {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .contact-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .icon {
-    color: #C8922A;
-    font-size: 12px;
-    width: 16px;
-    text-align: center;
-    flex-shrink: 0;
-  }
-
-  .contact-row .text {
-    color: #F5F0E8;
-    font-size: 13px;
-    letter-spacing: 0.3px;
-  }
-
-  .contact-row .badge {
-    color: rgba(200,146,42,0.55);
-    font-size: 8.5px;
+  .contact-block { display: flex; flex-direction: column; gap: 7px; }
+  .contact-row { display: flex; align-items: center; gap: 8px; }
+  .ci { color: #C8922A; font-size: 11px; width: 14px; text-align: center; flex-shrink: 0; }
+  .ct { color: #F5F0E8; font-size: 12px; letter-spacing: 0.2px; }
+  .ct.gold { color: #C8922A; font-weight: bold; }
+  .badge {
+    color: rgba(200,146,42,0.5);
+    font-size: 7.5px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-left: 4px;
+    margin-left: 3px;
   }
 
-  .accent-text {
-    color: #C8922A !important;
-    font-weight: bold;
+  /* Right — gorilla head bleed, flipped */
+  .right-bleed {
+    width: 180px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* ===================== BACK ===================== */
+  .right-bleed img {
+    position: absolute;
+    /* Flip horizontally so gorilla faces LEFT toward the card center */
+    transform: scaleX(-1);
+    /* Position: show just the face — right half of logo bleeds off right edge */
+    right: -60px;
+    top: 50%;
+    transform: scaleX(-1) translateY(-50%);
+    height: 420px;
+    width: auto;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.65) saturate(0.85);
+  }
+
+  /* Fade from center into the bleed image */
+  .right-bleed::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #080604 0%, rgba(8,6,4,0.3) 40%, transparent 100%);
+    z-index: 1;
+  }
+
+  /* Gold top-right accent */
+  .right-corner-tr {
+    position: absolute;
+    top: 0; right: 0;
+    width: 36px; height: 36px;
+    border-top: 2px solid rgba(200,146,42,0.65);
+    border-right: 2px solid rgba(200,146,42,0.65);
+    border-radius: 0 16px 0 0;
+    z-index: 10;
+  }
+  .right-corner-br {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 36px; height: 36px;
+    border-bottom: 2px solid rgba(200,146,42,0.65);
+    border-right: 2px solid rgba(200,146,42,0.65);
+    border-radius: 0 0 16px 0;
+    z-index: 10;
+  }
+
+  /* ============= BACK ============= */
   .back {
     background: linear-gradient(160deg, #0d0a07 0%, #080604 60%, #0f0d0a 100%);
     display: flex;
@@ -189,81 +205,41 @@
     gap: 12px;
     position: relative;
   }
-
   .back::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at center, rgba(200,146,42,0.08) 0%, transparent 65%);
+    background: radial-gradient(ellipse at center, rgba(200,146,42,0.09) 0%, transparent 65%);
   }
-
   .back-ring {
     position: absolute;
     width: 320px; height: 320px;
     border-radius: 50%;
-    border: 1px solid rgba(200,146,42,0.06);
+    border: 1px solid rgba(200,146,42,0.07);
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
   }
-
   .back-logo {
-    width: 68px;
-    height: 68px;
+    width: 68px; height: 68px;
     border-radius: 50%;
     border: 2px solid rgba(200,146,42,0.55);
     box-shadow: 0 0 20px rgba(200,146,42,0.2);
     overflow: hidden;
     position: relative; z-index: 1;
   }
-
   .back-logo img { width: 100%; height: 100%; object-fit: cover; }
-
-  .back-co {
-    text-align: center;
-    position: relative; z-index: 1;
-  }
-
-  .back-co .co-name {
-    color: #C8922A;
-    font-size: 14px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-
-  .back-co .co-sub {
-    color: rgba(245,240,232,0.3);
-    font-size: 7.5px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
-
-  .back-services {
-    text-align: center;
-    position: relative; z-index: 1;
-    margin-top: 2px;
-  }
-
-  .back-services p {
-    color: rgba(200,146,42,0.38);
-    font-size: 8.5px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    line-height: 1.9;
-  }
-
-  .back-url {
-    color: rgba(245,240,232,0.2);
-    font-size: 8.5px;
-    letter-spacing: 2px;
-    position: relative; z-index: 1;
-  }
+  .back-co { text-align: center; position: relative; z-index: 1; }
+  .back-co .co-name { color: #C8922A; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; }
+  .back-co .co-sub { color: rgba(245,240,232,0.3); font-size: 7.5px; letter-spacing: 2.5px; text-transform: uppercase; margin-top: 4px; }
+  .back-services { text-align: center; position: relative; z-index: 1; margin-top: 2px; }
+  .back-services p { color: rgba(200,146,42,0.38); font-size: 8.5px; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.9; }
+  .back-url { color: rgba(245,240,232,0.2); font-size: 8.5px; letter-spacing: 2px; position: relative; z-index: 1; }
 
   @media print {
     body { background: white; gap: 0.2in; padding: 0.2in; }
     .card { width: 3.5in; height: 2in; border-radius: 0.1in; page-break-inside: avoid; }
     .label, .hint { display: none; }
+    .right-bleed img { filter: brightness(0.8); }
   }
 </style>
 </head>
@@ -272,41 +248,52 @@
 <p class="label">— Front —</p>
 
 <div class="card front">
+  <div class="right-corner-tr"></div>
+  <div class="right-corner-br"></div>
 
-  <!-- Left: Banner image (gorilla climbing) -->
-  <div class="banner">
-    <img src="https://wastedape.org/background.png" alt="" />
+  <!-- Left: round logo -->
+  <div class="left-col">
+    <div class="logo-ring">
+      <img src="https://wastedape.org/logo.svg" alt="WastedApe" />
+    </div>
+    <div class="co-label">
+      <p>The Wasted Ape</p>
+      <p>Tech Solutions</p>
+    </div>
   </div>
 
-  <!-- Right: Info -->
-  <div class="info">
+  <!-- Center: name + contact -->
+  <div class="center-col">
     <div class="name-block">
-      <p class="company-line">WastedApe Tech Solutions</p>
       <h1>Daniel Bloom</h1>
-      <p class="title-line">Founder &amp; Technical Principal</p>
+      <p class="title">Founder &amp; Technical Principal</p>
       <div class="divider"></div>
     </div>
-
     <div class="contact-block">
       <div class="contact-row">
-        <span class="icon">📞</span>
-        <span class="text accent-text">(272) APE-DUDE</span>
+        <span class="ci">📞</span>
+        <span class="ct gold">(272) APE-DUDE</span>
         <span class="badge">Office</span>
       </div>
       <div class="contact-row">
-        <span class="icon">📱</span>
-        <span class="text">(330) 419-9283</span>
+        <span class="ci">📱</span>
+        <span class="ct">(330) 419-9283</span>
         <span class="badge">Cell</span>
       </div>
       <div class="contact-row">
-        <span class="icon">✉</span>
-        <span class="text">thewastedape@gmail.com</span>
+        <span class="ci">✉</span>
+        <span class="ct">thewastedape@gmail.com</span>
       </div>
       <div class="contact-row">
-        <span class="icon">🌐</span>
-        <span class="text accent-text">wastedape.org</span>
+        <span class="ci">🌐</span>
+        <span class="ct gold">wastedape.org</span>
       </div>
     </div>
+  </div>
+
+  <!-- Right: gorilla head bleed, mirrored facing left -->
+  <div class="right-bleed">
+    <img src="https://wastedape.org/logo.svg" alt="" />
   </div>
 
 </div>
@@ -315,21 +302,17 @@
 
 <div class="card back">
   <div class="back-ring"></div>
-
   <div class="back-logo">
     <img src="https://wastedape.org/logo.svg" alt="WastedApe Tech" />
   </div>
-
   <div class="back-co">
     <p class="co-name">WastedApe Tech</p>
     <p class="co-sub">Technology Solutions &nbsp;·&nbsp; Veteran Owned</p>
   </div>
-
   <div class="back-services">
     <p>AI &amp; Automation &nbsp;·&nbsp; Industrial Controls</p>
     <p>Data Center Audits &nbsp;·&nbsp; Custom Builds</p>
   </div>
-
   <p class="back-url">wastedape.org</p>
 </div>
 
