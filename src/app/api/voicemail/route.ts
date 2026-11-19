@@ -47,48 +47,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true })
     }
 
-    // Download recording — append .mp3 for audio format
-    let audioBuffer: ArrayBuffer | null = null
-    if (SW_PROJECT_ID && SW_AUTH_TOKEN) {
-      try {
-        const auth = Buffer.from(`${SW_PROJECT_ID}:${SW_AUTH_TOKEN}`).toString('base64')
-        const mp3Url = recordingUrl.endsWith('.mp3') ? recordingUrl : `${recordingUrl}.mp3`
-        const rec = await fetch(mp3Url, {
-          headers: { 'Authorization': `Basic ${auth}` }
-        })
-        if (rec.ok) {
-          audioBuffer = await rec.arrayBuffer()
-        } else {
-          console.error('Recording download failed:', rec.status)
-        }
-      } catch (e) {
-        console.error('Failed to download recording:', e)
-      }
-    }
+    // Extract recording SID from URL and build proxy link
+    const recordingSid = recordingUrl.split('/').pop()?.replace('.json', '') || ''
+    const listenUrl = `https://wastedape.org/api/recording/${recordingSid}`
 
-    if (audioBuffer && audioBuffer.byteLength > 0) {
-      // Send as MP3 audio (sendAudio supports MP3; sendVoice requires OGG only)
-      const formData = new FormData()
-      formData.append('chat_id', TELEGRAM_CHAT_ID)
-      formData.append('caption', `📞 New Voicemail — WastedApe Tech\n\nFrom: ${callerFormatted}\nDuration: ${duration}`)
-      formData.append('audio', new Blob([audioBuffer], { type: 'audio/mpeg' }), 'voicemail.mp3')
-
-      const tgRes = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendAudio`, {
-        method: 'POST',
-        body: formData,
-      })
-      if (!tgRes.ok) console.error('Telegram sendAudio failed:', await tgRes.text())
-    } else {
-      // Fallback text notification
-      await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: `📞 New Voicemail — WastedApe Tech\n\nFrom: ${callerFormatted}\nDuration: ${duration}\n\n⚠️ Audio unavailable.`,
-        }),
-      })
-    }
+    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: `📞 New Voicemail — WastedApe Tech\n\nFrom: ${callerFormatted}\nDuration: ${duration}\n\n🎙 Listen: ${listenUrl}`,
+        disable_web_page_preview: true,
+      }),
+    })
 
     return NextResponse.json({ ok: true })
   } catch (err) {
