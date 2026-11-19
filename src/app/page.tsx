@@ -57,7 +57,7 @@ const APPS = [
   {
     name: 'Boat Buddy',
     tagline: 'AI Marine Diagnostic Assistant',
-    desc: 'Diagnose any marine engine problem instantly. Photo analysis, service manuals, work orders, fleet management.',
+    desc: 'Diagnose any marine engine problem instantly. Photo analysis, service manuals, work orders, parts inventory, fleet management, cloud sync. Tiers: Free · First Mate $9.99/mo · Captain $24.99/mo · Admiral $49.99/mo. Add-ons: Yard Manager + Marina Manager. Android app on Play Store.',
     url: 'https://boatbuddy.thewastedape.com',
     logo: '/boat-buddy-logo.png',
     status: '🟢 Live',

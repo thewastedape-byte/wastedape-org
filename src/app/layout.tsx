@@ -5,6 +5,7 @@ import Analytics from '@/components/Analytics'
 import ViewTracker from '@/components/ViewTracker'
 import VisitorTracker from '@/components/VisitorTracker'
 import ChatWidget from '@/components/ChatWidget'
+import GlobalNav from '@/components/GlobalNav'
 
 export const metadata: Metadata = {
   title: 'WastedApe Tech - AI Tools & Automation for Trade Businesses | Veteran Owned',
@@ -102,6 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <ViewTracker />
         <VisitorTracker />
+        <GlobalNav />
         {children}
         <ChatWidget />
       </body>
