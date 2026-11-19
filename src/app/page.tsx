@@ -231,8 +231,7 @@ export default function HomePage() {
               <div style={{ fontSize: '36px', marginBottom: '12px' }}>📧</div>
               <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '8px' }}>Email</h3>
               <a href="mailto:thewastedape@gmail.com" style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '14px', fontWeight: 'bold', textDecoration: 'none', display: 'block', marginBottom: '6px' }}>thewastedape@gmail.com</a>
-              <p style={{ ...dim, fontSize: '13px', marginBottom: '16px' }}>Quotes, questions, RFPs — same-day response.</p>
-              <a href="/daniel-bloom-resume.pdf" download style={{ color: 'rgba(200,146,42,0.7)', fontFamily: 'Georgia, serif', fontSize: '13px', textDecoration: 'underline' }}>⬇ Download Resume</a>
+              <p style={{ ...dim, fontSize: '13px', margin: 0 }}>Quotes, questions, RFPs — same-day response.</p>
             </div>
           </div>
           <div style={{ textAlign: 'center' }}>
