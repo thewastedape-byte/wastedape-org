@@ -7,7 +7,7 @@ interface Message {
 }
 
 export default function ChatWidget() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -207,11 +207,11 @@ export default function ChatWidget() {
             background: surface,
             textAlign: 'center'
           }}>
-            <a href="tel:+13304199283" style={{
+            <a href="/maximus/book" style={{
               color: 'rgba(200,146,42,0.6)', fontSize: '11px',
               fontFamily: 'Georgia, serif', textDecoration: 'none'
             }}>
-              Or call/text: (330) 419-9283
+              Or book a free call →
             </a>
           </div>
         </div>
