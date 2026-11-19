@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 export const runtime = 'nodejs'
 
 const SUPABASE_URL = 'https://yruuzkxpnbgruwuivchy.supabase.co'
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlydXV6a3hwbmJncnV3dWl2Y2h5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODExMDQwOSwiZXhwIjoyMDkzNjg2NDA5fQ.W5L_dL7hVu6O0XWoSDIYMoJYwXUqu-291hBGluS_qkE'
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || ''
 
 export async function POST(req: NextRequest) {
   try {
@@ -26,11 +26,10 @@ export async function POST(req: NextRequest) {
     if (!clients?.length) return NextResponse.json({ ok: false })
 
     // Geolocate
-    let city = null
-    let region = null
-    let country = null
-    let company = null
-
+    let city = null,
+      region = null,
+      country = null,
+      company = null
     if (ip !== 'unknown' && !ip.startsWith('127.')) {
       try {
         const geo = await fetch(`https://ipapi.co/${ip}/json/`, {
@@ -43,13 +42,11 @@ export async function POST(req: NextRequest) {
           country = g.country_name
           company = g.org
         }
-      } catch (e) {
-        console.log('Geolocation failed:', e)
-      }
+      } catch {}
     }
 
     // Store event
-    const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/tracking_events`, {
+    await fetch(`${SUPABASE_URL}/rest/v1/tracking_events`, {
       method: 'POST',
       headers: {
         apikey: SUPABASE_KEY,
@@ -72,14 +69,8 @@ export async function POST(req: NextRequest) {
       })
     })
 
-    if (!insertRes.ok) {
-      console.error('Insert failed:', await insertRes.text())
-      return NextResponse.json({ ok: false })
-    }
-
     return NextResponse.json({ ok: true })
-  } catch (e) {
-    console.error('Tracker error:', e)
+  } catch {
     return NextResponse.json({ ok: false })
   }
 }
@@ -88,15 +79,5 @@ export async function GET(req: NextRequest) {
   // Allow CORS for the tracking script
   return new Response('ok', {
     headers: { 'Access-Control-Allow-Origin': '*' }
-  })
-}
-
-export async function OPTIONS(req: NextRequest) {
-  return new Response(null, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type'
-    }
   })
 }
