@@ -9,7 +9,7 @@ export default function GlobalNav() {
 
   return (
     <nav style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
       borderBottom: '1px solid rgba(200,146,42,0.2)',
       padding: '14px 24px',
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
