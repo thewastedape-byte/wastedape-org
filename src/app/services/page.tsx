@@ -35,6 +35,11 @@ export default function ServicesPage() {
         </div>
       </nav>
 
+      {/* Back to Home Button */}
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '24px 24px 0', width: '100%' }}>
+        <Link href="/" style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '14px', textDecoration: 'none' }}>← Back to Home</Link>
+      </div>
+
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '100px 24px 80px' }}>
         <div style={{ marginBottom: '48px', textAlign: 'center' }}>
           <p style={{ ...gold, fontSize: '12px', letterSpacing: '3px', marginBottom: '8px' }}>WHAT WE BUILD</p>
