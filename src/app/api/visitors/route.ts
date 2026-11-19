@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
   'https://yruuzkxpnbgruwuivchy.supabase.co',
-  proces…_KEY || 'eyJhbG…_qkE'
+  process.env.SUPABASE_SERVICE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlydXV6a3hwbmJncnV3dWl2Y2h5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODExMDQwOSwiZXhwIjoyMDkzNjg2NDA5fQ.W5L_dL7hVu6O0XWoSDIYMoJYwXUqu-291hBGluS_qkE'
 )
 
 export async function POST(req: NextRequest) {
