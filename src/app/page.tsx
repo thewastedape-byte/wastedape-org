@@ -94,6 +94,14 @@ const APPS = [
     logo: '/fret-buddy-logo.png',
     status: '🟢 Live',
   },
+  {
+    name: 'WastedApe Tracker',
+    tagline: 'Website Visitor Intelligence',
+    desc: 'Know exactly who’s visiting your website — city, company, pages viewed, device, and referrer. One line of code. Real-time dashboard.',
+    url: '/tracker',
+    logo: '/logo.svg',
+    status: '🟢 Live',
+  },
 ]
 
 export default function HomePage() {
