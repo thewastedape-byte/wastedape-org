@@ -37,8 +37,11 @@ const PLANS = [
 export default function TrackerLanding() {
   const [loading, setLoading] = useState<string | null>(null)
 
+  const [checkoutError, setCheckoutError] = useState('')
+
   const checkout = async (planId: string) => {
     setLoading(planId)
+    setCheckoutError('')
     try {
       const r = await fetch('/api/tracker/checkout', {
         method: 'POST',
@@ -46,8 +49,16 @@ export default function TrackerLanding() {
         body: JSON.stringify({ plan: planId })
       })
       const d = await r.json()
-      if (d.url) window.location.href = d.url
-    } catch { setLoading(null) }
+      if (d.url) {
+        window.location.href = d.url
+      } else {
+        setCheckoutError(d.error || 'Checkout failed — please try again or email thewastedape@gmail.com')
+        setLoading(null)
+      }
+    } catch (e) {
+      setCheckoutError('Connection error — please try again')
+      setLoading(null)
+    }
   }
 
   return (
@@ -133,7 +144,8 @@ export default function TrackerLanding() {
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <p style={{ color: gold, fontSize: '11px', letterSpacing: '3px', textAlign: 'center', margin: '0 0 12px' }}>PRICING</p>
           <h2 style={{ color: '#F5F0E8', fontSize: '36px', textAlign: 'center', margin: '0 0 12px' }}>Simple monthly pricing</h2>
-          <p style={{ color: dim, fontSize: '16px', textAlign: 'center', margin: '0 0 48px' }}>Cancel anytime. No contracts.</p>
+          <p style={{ color: dim, fontSize: '16px', textAlign: 'center', margin: '0 0 24px' }}>Cancel anytime. No contracts.</p>
+          {checkoutError && <div style={{ background: 'rgba(224,85,85,0.1)', border: '1px solid rgba(224,85,85,0.4)', borderRadius: '10px', padding: '14px', color: '#e05555', fontFamily: 'Georgia, serif', fontSize: '14px', textAlign: 'center', marginBottom: '24px' }}>{checkoutError}</div>}
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
             {PLANS.map(plan => (
