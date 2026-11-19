@@ -236,7 +236,7 @@ export default function HomePage() {
             </div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <p style={{ ...dim, fontSize: '14px' }}>Based in <strong style={{ color: '#F5F0E8' }}>West Virginia</strong> · On-site eastern OH/WV · Remote nationwide · Available immediately</p>
+            <p style={{ ...dim, fontSize: '14px' }}>Based in <strong style={{ color: '#F5F0E8' }}>West Virginia</strong> · On-site anywhere in the US (travel expenses covered) · Remote nationwide · Available immediately</p>
           </div>
         </div>
       </section>
