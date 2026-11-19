@@ -1,268 +1,293 @@
 'use client'
 import Link from 'next/link'
+import { useState } from 'react'
+
+const SERVICES = [
+  {
+    icon: '🤖',
+    name: 'Custom AI Bots',
+    desc: 'Fully built + deployed in 24 hours. Lead generation, calling, appointment booking, customer support.',
+    link: '/services/ai-bots'
+  },
+  {
+    icon: '📊',
+    name: 'Data Automation',
+    desc: 'Scrape, clean, enrich, and sync customer data. Integrations with your existing tools.',
+    link: '/services/automation'
+  },
+  {
+    icon: '🏭',
+    name: 'Industrial OT/IT',
+    desc: 'Energy audits, predictive maintenance, legacy system integration. Veteran-led engineering.',
+    link: '/services/engineering'
+  },
+  {
+    icon: '⚙️',
+    name: 'API + Custom Builds',
+    desc: 'Full-stack development. Anything from automation scripts to full applications.',
+    link: '/services/builds'
+  },
+]
 
 const APPS = [
   {
-    name: 'Boat Buddy',
-    tagline: 'AI Marine Diagnostic Assistant',
-    desc: 'Diagnose any marine engine problem instantly. Photo analysis, service manuals, work orders, fleet management. Built for boaters and marine service shops.',
+    name: 'Boat Buddy AI',
+    tagline: 'Marine Engine Diagnostics',
+    desc: 'AI photo analysis, service manuals, work orders. For marine shops and boat owners.',
     url: 'https://boatbuddy.thewastedape.com',
-    logo: '/boat-buddy-logo.png',
-    features: ['AI engine diagnosis', '25 system diagrams', 'Service manuals', 'Work orders + invoices', 'Parts inventory', 'Team management', '⚓ Add-on: Yard Manager ($29/mo)', '🚢 Add-on: Marina Manager ($49/mo)'],
+    status: '🟢 Live',
   },
   {
-    name: 'Diesel Dude',
-    tagline: 'AI Diesel Diagnostic Assistant — Coming Soon',
-    desc: 'From pickup trucks to heavy equipment — fault codes, DPF regens, DEF systems, and more. Built for fleet mechanics and heavy equipment operators. Currently in development.',
-    url: null,
-    logo: '/diesel-dude-logo.png',
-    comingSoon: true,
-    features: ['Cummins, CAT, Detroit, Deere', 'OBD2 + J1939 fault codes', 'Asset log by hours', 'Work orders + invoices', 'RTA Fleet integration', 'Service manuals'],
+    name: 'Diesel Dude AI',
+    tagline: 'Diesel & Heavy Equipment Diagnostics',
+    desc: 'Fault codes, DPF regens, DEF systems. For fleet mechanics and OEM technicians.',
+    url: 'https://diesel-dude-app.onrender.com',
+    status: '🟡 Beta',
   },
   {
     name: 'ContentBuddy',
-    tagline: 'AI Content Studio for Creators',
-    desc: 'Paste a topic or script and get everything in one click: full video script, 10 YouTube titles, SEO blog post, Instagram caption, TikTok script, Twitter thread, LinkedIn post, and email newsletter.',
+    tagline: 'AI Content Studio',
+    desc: 'Video scripts, blog posts, social captions — everything in one click.',
     url: 'https://content-buddy-app.onrender.com',
-    logo: '/content-buddy-logo.svg',
-    comingSoon: false,
-    features: ['Full video script from any topic', 'YouTube titles, description & chapters', 'SEO-optimized blog post', 'Instagram, TikTok, Twitter & LinkedIn captions', 'Email newsletter version', 'One click — everything in 30 seconds'],
+    status: '🟢 Live',
   },
   {
     name: 'CodexBuddy',
-    tagline: 'AI Coding Assistant for Developers',
-    desc: 'Fix bugs, complete code, explain logic, convert between languages, generate from scratch. Like GitHub Copilot — at a fraction of the price.',
+    tagline: 'AI Coding Assistant',
+    desc: 'Code completion, bug fixing, language conversion. GitHub Copilot alternative.',
     url: 'https://codex-buddy-app.onrender.com',
-    logo: '/logo.svg',
-    comingSoon: false,
-    features: ['AI code completion & generation', 'Bug finder & fixer', 'Code explainer in plain English', 'Convert between any languages', 'Docstring & comment generator', 'Starter $7.99/mo · Pro $19.99/mo unlimited'],
+    status: '🟢 Live',
   },
 ]
 
-const SERVICES_PREVIEW = [
-  { icon: '🤖', name: 'Custom AI Bot Builds', price: '$299 setup + $99/mo', desc: 'We build and deploy a custom AI assistant for your business in under a day.' },
-  { icon: '📞', name: 'AI Telemarketing', price: 'Per campaign', desc: 'AI-powered outbound calling that qualifies leads and books appointments automatically.' },
-  { icon: '🎯', name: 'Lead Generation Bots', price: 'From $199/mo', desc: 'Automated lead scraping, qualification, and outreach for your target industry.' },
-  { icon: '📅', name: 'Appointment Booking Bots', price: '$199 setup', desc: 'AI that handles scheduling, reminders, and confirmations — 24/7.' },
-]
-
 export default function HomePage() {
-  const dim = { color: 'rgba(245,240,232,0.6)', fontFamily: 'Georgia, serif' }
-  const gold = { color: '#C8922A', fontFamily: 'Georgia, serif' }
+  const [hoveredService, setHoveredService] = useState<number | null>(null)
 
   return (
-    <div style={{ background: '#060608', minHeight: '100vh' }}>
-
-      {/* Nav */}
-      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, borderBottom: '1px solid rgba(200,146,42,0.2)', padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(6,6,8,0.95)', backdropFilter: 'blur(8px)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/logo.svg" alt="WastedApe" style={{ height: '44px', width: '44px', borderRadius: '50%' }} />
-          <div>
-            <p style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontWeight: 'bold', fontSize: '16px', margin: 0, letterSpacing: '1px' }}>THE WASTED APE</p>
-            <p style={{ color: 'rgba(245,240,232,0.4)', fontFamily: 'Georgia, serif', fontSize: '10px', letterSpacing: '2px', margin: 0 }}>TECH SOLUTIONS</p>
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-          <a href="#apps" style={{ ...gold, fontSize: '13px', textDecoration: 'none' }}>Apps</a>
-          <Link href="/services" style={{ ...gold, fontSize: '13px', textDecoration: 'none' }}>Services</Link>
-          <a href="#contact" style={{ ...gold, fontSize: '13px', textDecoration: 'none' }}>Contact</a>
-          <Link href="/book" className="btn-primary" style={{ padding: '10px 20px', fontSize: '13px' }}>Get Started</Link>
-        </div>
-      </nav>
-
-      {/* Hero */}
-      <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', paddingTop: '80px', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/background.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 1.0 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(6,6,8,0.1) 0%, rgba(6,6,8,0.5) 70%, rgba(6,6,8,1) 100%)' }} />
-        
-        <div style={{ position: 'relative', zIndex: 10, padding: '0 24px', maxWidth: '800px', margin: '0 auto' }}>
-          <img src="/logo.svg" alt="WastedApe" style={{ height: '280px', width: '280px', borderRadius: '50%', marginBottom: '28px', border: '3px solid rgba(200,146,42,0.6)', boxShadow: '0 0 60px rgba(200,146,42,0.3)' }} />
-          <p style={{ ...gold, fontSize: '12px', letterSpacing: '4px', marginBottom: '12px' }}>AI &bull; TECH &bull; SOLUTIONS</p>
-          <h1 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 'bold', lineHeight: '1.2', marginBottom: '20px' }}>
-            Technology that works as hard as you do.
-          </h1>
-          <p style={{ ...dim, fontSize: '18px', lineHeight: '1.7', marginBottom: '36px', maxWidth: '600px', margin: '0 auto 36px' }}>
-            AI assistants custom-built for your business. Marine diagnostics, diesel fleet tools, lead generation, AI calling, and more. Setup in hours, not months.
-          </p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/services" className="btn-primary" style={{ fontSize: '17px', padding: '16px 36px' }}>See All Services</Link>
-            <Link href="/book" className="btn-outline">Book a Free Call</Link>
-          </div>
+    <main style={{ background: '#0a0a0a', color: '#f5f0e8', minHeight: '100vh' }}>
+      {/* HERO SECTION */}
+      <section style={{
+        padding: '80px 20px',
+        textAlign: 'center',
+        borderBottom: '1px solid rgba(245,240,232,0.1)',
+      }}>
+        <h1 style={{
+          fontSize: '3.5rem',
+          margin: '0 0 20px 0',
+          fontWeight: 'bold',
+          lineHeight: 1.2,
+        }}>
+          AI Tools Built For <span style={{ color: '#ff6b35' }}>Real Work</span>
+        </h1>
+        <p style={{
+          fontSize: '1.3rem',
+          color: 'rgba(245,240,232,0.7)',
+          maxWidth: '700px',
+          margin: '0 auto 40px',
+          lineHeight: 1.6,
+        }}>
+          Custom AI automation, bots, and tools for marine shops, mechanics, fleet managers, and industrial operations. Veteran-owned. Fast. No BS.
+        </p>
+        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link href="/services" style={{
+            padding: '12px 30px',
+            background: '#ff6b35',
+            color: '#0a0a0a',
+            textDecoration: 'none',
+            borderRadius: '4px',
+            fontWeight: 'bold',
+            fontSize: '1.1rem',
+            border: 'none',
+            cursor: 'pointer',
+          }}>
+            View Services
+          </Link>
+          <Link href="/maximus/book" style={{
+            padding: '12px 30px',
+            background: 'transparent',
+            color: '#ff6b35',
+            textDecoration: 'none',
+            borderRadius: '4px',
+            fontWeight: 'bold',
+            fontSize: '1.1rem',
+            border: '2px solid #ff6b35',
+            cursor: 'pointer',
+          }}>
+            Book a Consultation
+          </Link>
         </div>
       </section>
 
-      {/* Apps */}
-      <section id="apps" style={{ padding: '80px 24px', maxWidth: '1100px', margin: '0 auto' }}>
-        <p style={{ ...gold, fontSize: '12px', letterSpacing: '3px', textAlign: 'center', marginBottom: '8px' }}>OUR APPS</p>
-        <h2 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '36px', fontWeight: 'bold', textAlign: 'center', marginBottom: '12px' }}>Built by WastedApe</h2>
-        <p style={{ ...dim, fontSize: '16px', textAlign: 'center', marginBottom: '48px' }}>Professional AI tools for specialized industries. Free to try.</p>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '28px' }}>
-          {APPS.map(app => (
-            <div key={app.name} style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '16px', padding: '32px', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-                <img src={app.logo} alt={app.name} style={{ height: '56px', width: '56px', borderRadius: '12px', objectFit: 'cover' }} />
-                <div>
-                  <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '22px', margin: 0 }}>{app.name}</h3>
-                  <p style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '12px', margin: 0, letterSpacing: '1px' }}>{app.tagline}</p>
-                </div>
-              </div>
-              <p style={{ ...dim, fontSize: '14px', lineHeight: '1.7', marginBottom: '20px', flexGrow: 1 }}>{app.desc}</p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
-                {app.features.map(f => (
-                  <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'rgba(245,240,232,0.65)', fontFamily: 'Georgia, serif', fontSize: '13px', marginBottom: '6px' }}>
-                    <span style={{ color: '#C8922A' }}>&#10003;</span> {f}
-                  </li>
-                ))}
-              </ul>
-              {(app as any).comingSoon ? (
-                <div style={{ textAlign: 'center', padding: '12px', borderRadius: '10px', background: 'rgba(200,146,42,0.08)', border: '1px dashed rgba(200,146,42,0.3)' }}>
-                  <p style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '13px', margin: 0 }}>🚧 Under Development — Coming Soon</p>
-                </div>
-              ) : (
-                <a href={app.url!} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ textAlign: 'center', display: 'block', textDecoration: 'none' }}>
-                  Try {app.name} Free &#8594;
-                </a>
-              )}
-            </div>
+      {/* SERVICES GRID */}
+      <section style={{ padding: '80px 20px' }}>
+        <h2 style={{
+          fontSize: '2.5rem',
+          textAlign: 'center',
+          marginBottom: '60px',
+        }}>
+          Services
+        </h2>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '30px',
+          maxWidth: '1200px',
+          margin: '0 auto',
+        }}>
+          {SERVICES.map((service, i) => (
+            <Link
+              href={service.link}
+              key={i}
+              style={{
+                padding: '30px',
+                background: hoveredService === i ? '#1a1a1a' : '#111111',
+                border: '1px solid rgba(245,240,232,0.1)',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                color: 'inherit',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                transform: hoveredService === i ? 'translateY(-4px)' : 'translateY(0)',
+              }}
+              onMouseEnter={() => setHoveredService(i)}
+              onMouseLeave={() => setHoveredService(null)}
+            >
+              <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>{service.icon}</div>
+              <h3 style={{ fontSize: '1.3rem', marginBottom: '10px', margin: '0 0 10px 0' }}>
+                {service.name}
+              </h3>
+              <p style={{ color: 'rgba(245,240,232,0.6)', margin: 0, lineHeight: 1.6 }}>
+                {service.desc}
+              </p>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* Services Preview */}
-      <section style={{ padding: '80px 24px', background: 'rgba(200,146,42,0.04)', borderTop: '1px solid rgba(200,146,42,0.12)' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <p style={{ ...gold, fontSize: '12px', letterSpacing: '3px', textAlign: 'center', marginBottom: '8px' }}>WHAT WE BUILD</p>
-          <h2 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '36px', fontWeight: 'bold', textAlign: 'center', marginBottom: '12px' }}>Full-Service AI for Your Business</h2>
-          <p style={{ ...dim, fontSize: '16px', textAlign: 'center', marginBottom: '48px' }}>From lead gen to customer calls — we automate the work that's eating your time.</p>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '48px' }}>
-            {SERVICES_PREVIEW.map(s => (
-              <div key={s.name} style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.2)', borderRadius: '14px', padding: '28px' }}>
-                <div style={{ fontSize: '32px', marginBottom: '12px' }}>{s.icon}</div>
-                <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '18px', margin: '0 0 6px' }}>{s.name}</h3>
-                <p style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '13px', margin: '0 0 10px', fontWeight: 'bold' }}>{s.price}</p>
-                <p style={{ ...dim, fontSize: '14px', lineHeight: '1.6', margin: 0 }}>{s.desc}</p>
+      {/* APPS SHOWCASE */}
+      <section style={{
+        padding: '80px 20px',
+        borderTop: '1px solid rgba(245,240,232,0.1)',
+        background: 'rgba(255,107,53,0.02)',
+      }}>
+        <h2 style={{
+          fontSize: '2.5rem',
+          textAlign: 'center',
+          marginBottom: '60px',
+        }}>
+          AI Apps
+        </h2>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '30px',
+          maxWidth: '1200px',
+          margin: '0 auto',
+        }}>
+          {APPS.map((app, i) => (
+            <a
+              href={app.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={i}
+              style={{
+                padding: '30px',
+                background: '#1a1a1a',
+                border: '1px solid rgba(245,240,232,0.15)',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                color: 'inherit',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                marginBottom: '20px',
+              }}>
+                <div>
+                  <h3 style={{ fontSize: '1.4rem', margin: '0 0 5px 0' }}>
+                    {app.name}
+                  </h3>
+                  <p style={{ fontSize: '0.95rem', color: '#ff6b35', margin: 0, fontWeight: 'bold' }}>
+                    {app.tagline}
+                  </p>
+                </div>
+                <div style={{ fontSize: '1rem' }}>{app.status}</div>
               </div>
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center' }}>
-            <Link href="/services" className="btn-primary" style={{ fontSize: '17px', padding: '16px 40px', marginRight: '16px' }}>See All Services</Link>
-            <Link href="/book" className="btn-outline">Book a Free Call</Link>
-          </div>
+              <p style={{
+                color: 'rgba(245,240,232,0.7)',
+                lineHeight: 1.6,
+                flexGrow: 1,
+              }}>
+                {app.desc}
+              </p>
+              <div style={{ marginTop: '20px', color: '#ff6b35', fontWeight: 'bold' }}>
+                Launch App →
+              </div>
+            </a>
+          ))}
         </div>
       </section>
 
-      {/* Consulting Services */}
-      <section style={{ padding: '80px 24px' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <p style={{ ...gold, fontSize: '12px', letterSpacing: '3px', textAlign: 'center', marginBottom: '8px' }}>CONSULTING</p>
-          <h2 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '36px', fontWeight: 'bold', textAlign: 'center', marginBottom: '12px' }}>Industrial & Infrastructure Consulting</h2>
-          <p style={{ ...dim, fontSize: '16px', textAlign: 'center', marginBottom: '48px' }}>20 years of hands-on industrial controls and critical infrastructure experience. On-site in eastern OH/WV or remote nationwide.</p>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '28px', marginBottom: '28px' }}>
-
-            {/* Industrial Controls */}
-            <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '16px', padding: '32px' }}>
-              <div style={{ fontSize: '36px', marginBottom: '12px' }}>🏭</div>
-              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '22px', marginBottom: '6px' }}>Industrial Controls & Automation</h3>
-              <p style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '14px', fontWeight: 'bold', marginBottom: '12px' }}>$75–$150/hr &bull; On-site OH/WV or Remote</p>
-              <p style={{ ...dim, fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>Siemens S7, Allen-Bradley, SCADA, PLC programming, HMI, VFDs, and OT networking. 20+ years on the floor. The technician who shows up and actually fixes it.</p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {['Siemens TIA Portal / S7-1500 / PROFINET', 'Allen-Bradley Studio 5000 / RSLogix / ControlLogix', 'SCADA system design & integration', 'HMI configuration & commissioning', 'VFD installation & programming', 'CANbus / LIN bus / J1939 / PROFINET', 'OT network design & troubleshooting', 'OT/IT convergence consulting'].map(f => (
-                  <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', color: 'rgba(245,240,232,0.65)', fontFamily: 'Georgia, serif', fontSize: '13px', marginBottom: '6px' }}>
-                    <span style={{ color: '#C8922A', flexShrink: 0 }}>&#10003;</span> {f}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Data Center Audits */}
-            <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '16px', padding: '32px' }}>
-              <div style={{ fontSize: '36px', marginBottom: '12px' }}>⚡</div>
-              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '22px', marginBottom: '6px' }}>Data Center Energy Audits</h3>
-              <p style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '14px', fontWeight: 'bold', marginBottom: '12px' }}>$200–$5,000/engagement &bull; NoVA/Ashburn Focus</p>
-              <p style={{ ...dim, fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>PUE/WUE optimization and energy efficiency audits for data center operators. Northern Virginia is 70% of global internet traffic — we're 2 hours away and actively serving this market.</p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {['PUE & WUE measurement and benchmarking', 'Electrical consumption analysis (clamp meter)', 'Thermal imaging & hotspot detection', 'Cooling tower water chemistry (TDS/pH)', 'Utility bill audit — 12-month analysis', 'Cooling system efficiency assessment', 'Written report with ROI recommendations', 'Monitoring subscriptions ($99–$299/mo)'].map(f => (
-                  <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', color: 'rgba(245,240,232,0.65)', fontFamily: 'Georgia, serif', fontSize: '13px', marginBottom: '6px' }}>
-                    <span style={{ color: '#C8922A', flexShrink: 0 }}>&#10003;</span> {f}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-          </div>
-
-          {/* Credentials bar */}
-          <div style={{ background: 'rgba(200,146,42,0.06)', border: '1px solid rgba(200,146,42,0.15)', borderRadius: '12px', padding: '20px 28px', display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
-            {['ABYC Certified Marine Tech', 'Google Cybersecurity Cert', 'John Deere University Level 2', 'USMC MOS 2111 — Systems Maintenance', '20+ Yrs IT & Industrial', '10+ Production AI Apps'].map(c => (
-              <span key={c} style={{ color: 'rgba(245,240,232,0.6)', fontFamily: 'Georgia, serif', fontSize: '12px', letterSpacing: '0.5px' }}>✓ {c}</span>
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: '36px', display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/book" className="btn-primary" style={{ fontSize: '16px', padding: '14px 36px' }}>Book a Consultation</Link>
-            <a href="/daniel-bloom-resume.pdf" download className="btn-outline" style={{ fontSize: '16px', padding: '14px 36px', textDecoration: 'none' }}>Download Resume</a>
-          </div>
-        </div>
+      {/* CTA SECTION */}
+      <section style={{
+        padding: '80px 20px',
+        textAlign: 'center',
+        borderTop: '1px solid rgba(245,240,232,0.1)',
+      }}>
+        <h2 style={{ fontSize: '2.5rem', marginBottom: '30px' }}>
+          Ready to Automate?
+        </h2>
+        <p style={{
+          fontSize: '1.1rem',
+          color: 'rgba(245,240,232,0.7)',
+          maxWidth: '600px',
+          margin: '0 auto 40px',
+        }}>
+          Talk to our team. We build custom solutions for trades, industrial operations, and businesses that need AI that actually works.
+        </p>
+        <Link href="/maximus/book" style={{
+          padding: '15px 40px',
+          background: '#ff6b35',
+          color: '#0a0a0a',
+          textDecoration: 'none',
+          borderRadius: '4px',
+          fontWeight: 'bold',
+          fontSize: '1.1rem',
+          border: 'none',
+          cursor: 'pointer',
+          display: 'inline-block',
+        }}>
+          Book 30-Minute Consultation
+        </Link>
       </section>
 
-      {/* Quick Contact / Booking */}
-      <section id="contact" style={{ padding: '80px 24px', background: 'rgba(200,146,42,0.06)', borderTop: '1px solid rgba(200,146,42,0.15)', borderBottom: '1px solid rgba(200,146,42,0.15)' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <p style={{ ...gold, fontSize: '12px', letterSpacing: '3px', textAlign: 'center', marginBottom: '8px' }}>GET IN TOUCH</p>
-          <h2 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 'bold', textAlign: 'center', marginBottom: '12px', lineHeight: '1.2' }}>Ready to get started?</h2>
-          <p style={{ ...dim, fontSize: '17px', lineHeight: '1.7', textAlign: 'center', marginBottom: '48px', maxWidth: '600px', margin: '0 auto 48px' }}>Book a free 15-minute call. We'll scope your project, give you a firm price, and start the same week.</p>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '40px' }}>
-
-            <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '14px', padding: '28px', textAlign: 'center' }}>
-              <div style={{ fontSize: '36px', marginBottom: '12px' }}>📞</div>
-              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '8px' }}>Call or Text</h3>
-              <a href="tel:+13304199283" style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', display: 'block', marginBottom: '6px' }}>(330) 419-9283</a>
-              <p style={{ ...dim, fontSize: '13px', margin: 0 }}>Mon–Fri, 8am–6pm EST<br/>Eastern OH / WV preferred for on-site</p>
-            </div>
-
-            <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '14px', padding: '28px', textAlign: 'center' }}>
-              <div style={{ fontSize: '36px', marginBottom: '12px' }}>📅</div>
-              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '8px' }}>Book a Free Call</h3>
-              <p style={{ ...dim, fontSize: '14px', marginBottom: '20px', lineHeight: '1.6' }}>15 minutes. No sales pitch — just scoping your project and giving you a real number.</p>
-              <Link href="/book" className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none', padding: '12px 24px', fontSize: '15px' }}>Schedule Now →</Link>
-            </div>
-
-            <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '14px', padding: '28px', textAlign: 'center' }}>
-              <div style={{ fontSize: '36px', marginBottom: '12px' }}>📧</div>
-              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '8px' }}>Email</h3>
-              <a href="mailto:thewastedape@gmail.com" style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '15px', fontWeight: 'bold', textDecoration: 'none', display: 'block', marginBottom: '6px' }}>thewastedape@gmail.com</a>
-              <p style={{ ...dim, fontSize: '13px', marginBottom: '16px' }}>Quotes, questions, RFPs — usually respond same day.</p>
-              <a href="/daniel-bloom-resume.pdf" download style={{ color: 'rgba(200,146,42,0.7)', fontFamily: 'Georgia, serif', fontSize: '13px', textDecoration: 'underline' }}>⬇ Download Resume / Portfolio</a>
-            </div>
-
-          </div>
-
-          <div style={{ textAlign: 'center' }}>
-            <p style={{ ...dim, fontSize: '14px' }}>Based in <strong style={{ color: '#F5F0E8' }}>West Virginia</strong> · On-site in eastern OH/WV · Remote nationwide · Available immediately</p>
-          </div>
+      {/* FOOTER LINKS */}
+      <footer style={{
+        padding: '40px 20px',
+        textAlign: 'center',
+        borderTop: '1px solid rgba(245,240,232,0.1)',
+        color: 'rgba(245,240,232,0.5)',
+        fontSize: '0.9rem',
+      }}>
+        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '20px' }}>
+          <Link href="/tos" style={{ color: 'rgba(245,240,232,0.5)', textDecoration: 'none' }}>
+            Terms of Service
+          </Link>
+          <Link href="/privacy" style={{ color: 'rgba(245,240,232,0.5)', textDecoration: 'none' }}>
+            Privacy Policy
+          </Link>
+          <a href="mailto:contact@wastedape.org" style={{ color: 'rgba(245,240,232,0.5)', textDecoration: 'none' }}>
+            contact@wastedape.org
+          </a>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer style={{ padding: '32px 24px', borderTop: '1px solid rgba(200,146,42,0.15)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/logo.svg" alt="WastedApe" style={{ height: '36px', width: '36px', borderRadius: '50%' }} />
-          <p style={{ color: 'rgba(245,240,232,0.3)', fontFamily: 'Georgia, serif', fontSize: '12px', margin: 0 }}>
-            &copy; 2026 WastedApe &bull; wastedape.org
-          </p>
-        </div>
-        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-          <a href="https://boatbuddy.thewastedape.com" style={{ color: 'rgba(200,146,42,0.5)', fontFamily: 'Georgia, serif', fontSize: '12px', textDecoration: 'none' }}>Boat Buddy</a>
-          <a href="https://dieseldude.thewastedape.com" style={{ color: 'rgba(200,146,42,0.5)', fontFamily: 'Georgia, serif', fontSize: '12px', textDecoration: 'none' }}>Diesel Dude</a>
-          <Link href="/services" style={{ color: 'rgba(200,146,42,0.5)', fontFamily: 'Georgia, serif', fontSize: '12px', textDecoration: 'none' }}>Services</Link>
-          <a href="mailto:thewastedape@gmail.com" style={{ color: 'rgba(200,146,42,0.5)', fontFamily: 'Georgia, serif', fontSize: '12px', textDecoration: 'none' }}>Contact</a>
-        </div>
+        <p style={{ margin: 0 }}>© {new Date().getFullYear()} WastedApe Tech. Veteran-owned.</p>
       </footer>
-    </div>
+    </main>
   )
 }

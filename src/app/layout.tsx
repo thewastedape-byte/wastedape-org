@@ -3,6 +3,7 @@ import Script from 'next/script'
 import './globals.css'
 import Analytics from '@/components/Analytics'
 import ViewTracker from '@/components/ViewTracker'
+import VisitorTracker from '@/components/VisitorTracker'
 import ChatWidget from '@/components/ChatWidget'
 
 export const metadata: Metadata = {
@@ -100,6 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
         <Analytics />
         <ViewTracker />
+        <VisitorTracker />
         {children}
         <ChatWidget />
       </body>
