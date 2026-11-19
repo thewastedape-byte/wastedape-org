@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WastedApe Tech — Business Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400&display=swap');
+
+  body {
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 40px;
+    font-family: Georgia, serif;
+    padding: 40px;
+  }
+
+  .label {
+    color: rgba(200,146,42,0.5);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ============================================
+     CARD — 3.5in × 2in = 1050px × 600px @ 300dpi
+     Screen display: 700px × 400px
+  ============================================ */
+  .card {
+    width: 700px;
+    height: 400px;
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 0 1px rgba(200,146,42,0.3);
+  }
+
+  /* ——— FRONT ——— */
+  .front {
+    background: #0a0806;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .front-left {
+    width: 220px;
+    background: linear-gradient(160deg, #121008 0%, #0a0806 100%);
+    border-right: 1px solid rgba(200,146,42,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 32px 24px;
+    flex-shrink: 0;
+  }
+
+  .logo-ring {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 2px solid rgba(200,146,42,0.65);
+    box-shadow: 0 0 20px rgba(200,146,42,0.25), inset 0 0 20px rgba(0,0,0,0.5);
+    overflow: hidden;
+    background: #080604;
+  }
+
+  .logo-ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .brand-label {
+    text-align: center;
+  }
+
+  .brand-label p {
+    color: rgba(200,146,42,0.55);
+    font-size: 8px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  .front-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 36px 40px;
+    position: relative;
+  }
+
+  /* Subtle radial glow */
+  .front-right::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,146,42,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .name-block h1 {
+    color: #F5F0E8;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .name-block .title {
+    color: #C8922A;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(to right, rgba(200,146,42,0.6), transparent);
+    margin: 12px 0;
+  }
+
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .contact-icon {
+    color: #C8922A;
+    font-size: 13px;
+    width: 18px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .contact-row span {
+    color: #F5F0E8;
+    font-size: 13.5px;
+    letter-spacing: 0.3px;
+  }
+
+  .contact-row .accent {
+    color: #C8922A;
+    font-weight: bold;
+  }
+
+  /* Gold corner accent */
+  .corner-tl {
+    position: absolute;
+    top: 0; left: 0;
+    width: 40px; height: 40px;
+    border-top: 2px solid rgba(200,146,42,0.5);
+    border-left: 2px solid rgba(200,146,42,0.5);
+    border-radius: 18px 0 0 0;
+  }
+  .corner-br {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 40px; height: 40px;
+    border-bottom: 2px solid rgba(200,146,42,0.5);
+    border-right: 2px solid rgba(200,146,42,0.5);
+    border-radius: 0 0 18px 0;
+  }
+
+
+  /* ——— BACK ——— */
+  .back {
+    background: linear-gradient(160deg, #0d0b09 0%, #0a0806 60%, #0f0d0b 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    position: relative;
+  }
+
+  .back::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(200,146,42,0.08) 0%, transparent 65%);
+  }
+
+  /* Concentric circle accents */
+  .back::after {
+    content: '';
+    position: absolute;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,146,42,0.07);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .back-logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 2px solid rgba(200,146,42,0.55);
+    box-shadow: 0 0 24px rgba(200,146,42,0.2);
+    overflow: hidden;
+    position: relative; z-index: 1;
+  }
+
+  .back-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .back-name {
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+
+  .back-name .company {
+    color: #C8922A;
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .back-name .sub {
+    color: rgba(245,240,232,0.35);
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .back-services {
+    text-align: center;
+    position: relative; z-index: 1;
+    margin-top: 4px;
+  }
+
+  .back-services p {
+    color: rgba(200,146,42,0.4);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+
+  .back-url {
+    color: rgba(245,240,232,0.25);
+    font-size: 9px;
+    letter-spacing: 2px;
+    position: relative; z-index: 1;
+    margin-top: 4px;
+  }
+
+  /* ——— Print ——— */
+  @media print {
+    body {
+      background: white;
+      gap: 0.25in;
+      padding: 0.25in;
+    }
+    .card {
+      width: 3.5in;
+      height: 2in;
+      border-radius: 0.1in;
+      page-break-inside: avoid;
+    }
+    .label { display: none; }
+    .hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<p class="label">Front</p>
+
+<div class="card front">
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
+
+  <!-- Left panel -->
+  <div class="front-left">
+    <div class="logo-ring">
+      <img src="https://wastedape.org/logo.svg" alt="WastedApe Tech" />
+    </div>
+    <div class="brand-label">
+      <p>The Wasted Ape</p>
+      <p>Tech Solutions</p>
+    </div>
+  </div>
+
+  <!-- Right panel -->
+  <div class="front-right">
+    <div class="name-block">
+      <h1>Daniel Bloom</h1>
+      <p class="title">Founder &amp; Technical Principal</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="contact-block">
+      <div class="contact-row">
+        <span class="contact-icon">📞</span>
+        <span class="accent">(272) APE-DUDE</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">✉</span>
+        <span>thewastedape@gmail.com</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">🌐</span>
+        <span class="accent">wastedape.org</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="label">Back</p>
+
+<div class="card back">
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
+
+  <div class="back-logo">
+    <img src="https://wastedape.org/logo.svg" alt="WastedApe Tech" />
+  </div>
+
+  <div class="back-name">
+    <p class="company">WastedApe Tech</p>
+    <p class="sub">Technology Solutions · Veteran Owned</p>
+  </div>
+
+  <div class="back-services">
+    <p>AI &amp; Automation &nbsp;·&nbsp; Industrial Controls</p>
+    <p>Data Center Audits &nbsp;·&nbsp; Custom Builds</p>
+  </div>
+
+  <p class="back-url">wastedape.org</p>
+</div>
+
+<p class="hint" style="color:rgba(200,146,42,0.3);font-size:11px;letter-spacing:2px;font-family:Georgia,serif;">
+  CTRL+P TO PRINT &nbsp;·&nbsp; SET TO 3.5" × 2" IN PRINTER
+</p>
+
+</body>
+</html>
