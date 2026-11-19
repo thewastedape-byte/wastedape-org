@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 export default function TrackerSignup() {
   const [form, setForm] = useState({ name: '', email: '', website: '', password: '' })
+  const [agreed, setAgreed] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [trackingId, setTrackingId] = useState('')
@@ -184,15 +185,24 @@ export default function TrackerSignup() {
                 <input type="password" placeholder="Create a password" value={form.password} onChange={e => setForm(f => ({...f, password: e.target.value}))} required style={inputStyle} />
               </div>
 
-              <button type="submit" disabled={loading} style={{
+              {/* TOS checkbox */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '14px', background: 'rgba(200,146,42,0.05)', border: '1px solid rgba(200,146,42,0.2)', borderRadius: '10px' }}>
+                <input type="checkbox" id="tos" checked={agreed} onChange={e => setAgreed(e.target.checked)}
+                  style={{ marginTop: '2px', accentColor: gold, width: '16px', height: '16px', flexShrink: 0, cursor: 'pointer' }} />
+                <label htmlFor="tos" style={{ color: dim, fontFamily: 'Georgia, serif', fontSize: '13px', lineHeight: 1.5, cursor: 'pointer' }}>
+                  I agree to the <a href="/tos" target="_blank" style={{ color: gold, textDecoration: 'underline' }}>Terms of Service</a>. I understand that I am responsible for disclosing the use of visitor tracking on my own website.
+                </label>
+              </div>
+
+              <button type="submit" disabled={loading || !agreed} style={{
                 width: '100%', padding: '15px', marginTop: '4px',
-                background: loading ? 'rgba(200,146,42,0.4)' : gold,
-                color: '#060608', border: 'none', borderRadius: '12px',
+                background: !agreed ? 'rgba(200,146,42,0.25)' : loading ? 'rgba(200,146,42,0.4)' : gold,
+                color: !agreed ? 'rgba(200,146,42,0.5)' : '#060608', border: 'none', borderRadius: '12px',
                 fontFamily: 'Georgia, serif', fontWeight: 'bold',
-                fontSize: '16px', cursor: loading ? 'default' : 'pointer',
+                fontSize: '16px', cursor: !agreed || loading ? 'default' : 'pointer',
                 transition: 'all 0.2s',
               }}>
-                {loading ? 'Setting up your account...' : 'Get My Tracking ID →'}
+                {loading ? 'Setting up your account...' : agreed ? 'Get My Tracking ID →' : 'Please agree to Terms below'}
               </button>
             </form>
 
