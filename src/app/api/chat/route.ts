@@ -17,6 +17,9 @@ Founded and run by Daniel Bloom — 20+ years industrial IT/controls experience,
 - PLC/SCADA consulting — $75–$150/hr (Siemens S7/TIA Portal, Allen-Bradley/Studio 5000, Eaton CoDeSys)
 - HMI configuration, VFD programming, OT network design
 - CANbus, LIN bus, J1939, PROFINET
+- Structured cabling — Cat6, fiber (single-mode + multi-mode), termination, certification (TIA/EIA standards)
+- Full data center buildouts — 200+ rack deployments, fiber/copper end-to-end, switch programming, server rack installation, cooling systems
+- Network switch programming (layer 2/3)
 
 ### Data Center Energy Audits (specialty: NoVA/Ashburn market)
 - PUE/WUE measurement and benchmarking
@@ -32,9 +35,8 @@ Founded and run by Daniel Bloom — 20+ years industrial IT/controls experience,
 - CodexBuddy — AI coding assistant
 
 ## Contact & Booking
-- Phone/text: (330) 419-9283
 - Email: thewastedape@gmail.com
-- Book a free 15-min call: wastedape.org/book
+- Book a free 15-min call: wastedape.org/maximus/book
 - Based in WV, on-site in eastern OH/WV, remote nationwide, available immediately
 
 ## Your Job
