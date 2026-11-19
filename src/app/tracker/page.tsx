@@ -38,15 +38,26 @@ export default function TrackerLanding() {
   const [loading, setLoading] = useState<string | null>(null)
 
   const [checkoutError, setCheckoutError] = useState('')
+  const [showEmailModal, setShowEmailModal] = useState(false)
+  const [selectedPlan, setSelectedPlan] = useState('')
+  const [email, setEmail] = useState('')
 
-  const checkout = async (planId: string) => {
-    setLoading(planId)
+  const startCheckout = (planId: string) => {
+    setSelectedPlan(planId)
+    setShowEmailModal(true)
     setCheckoutError('')
+  }
+
+  const checkout = async () => {
+    if (!email || !email.includes('@')) { setCheckoutError('Please enter a valid email'); return }
+    setLoading(selectedPlan)
+    setCheckoutError('')
+    setShowEmailModal(false)
     try {
       const r = await fetch('/api/tracker/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: planId })
+        body: JSON.stringify({ plan: selectedPlan, email })
       })
       const d = await r.json()
       if (d.url) {
@@ -55,7 +66,7 @@ export default function TrackerLanding() {
         setCheckoutError(d.error || 'Checkout failed — please try again or email thewastedape@gmail.com')
         setLoading(null)
       }
-    } catch (e) {
+    } catch {
       setCheckoutError('Connection error — please try again')
       setLoading(null)
     }
@@ -164,7 +175,7 @@ export default function TrackerLanding() {
                     </li>
                   ))}
                 </ul>
-                <button onClick={() => checkout(plan.id)} disabled={loading === plan.id}
+                <button onClick={() => startCheckout(plan.id)} disabled={loading === plan.id}
                   style={{ width: '100%', padding: '14px', background: plan.highlight ? gold : 'transparent', color: plan.highlight ? '#060608' : gold, border: `1px solid ${gold}`, borderRadius: '10px', fontFamily: 'Georgia, serif', fontWeight: 'bold', fontSize: '15px', cursor: 'pointer' }}>
                   {loading === plan.id ? 'Redirecting...' : `Start ${plan.name} →`}
                 </button>
@@ -173,6 +184,30 @@ export default function TrackerLanding() {
           </div>
         </div>
       </section>
+
+      {/* Email Modal */}
+      {showEmailModal && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }} onClick={() => setShowEmailModal(false)}>
+          <div style={{ background: '#080604', border: '2px solid rgba(200,146,42,0.5)', borderRadius: '20px', padding: '36px', maxWidth: '420px', width: '100%' }} onClick={e => e.stopPropagation()}>
+            <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '22px', margin: '0 0 8px', textAlign: 'center' }}>One quick step</h3>
+            <p style={{ color: dim, fontFamily: 'Georgia, serif', fontSize: '14px', textAlign: 'center', margin: '0 0 24px' }}>Enter your email to continue to checkout.</p>
+            {checkoutError && <div style={{ background: 'rgba(224,85,85,0.1)', border: '1px solid rgba(224,85,85,0.4)', borderRadius: '8px', padding: '10px', color: '#e05555', fontFamily: 'Georgia, serif', fontSize: '13px', marginBottom: '16px', textAlign: 'center' }}>{checkoutError}</div>}
+            <input
+              type="email"
+              placeholder="your@email.com"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && checkout()}
+              autoFocus
+              style={{ width: '100%', padding: '13px 16px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(200,146,42,0.4)', borderRadius: '10px', color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '15px', outline: 'none', boxSizing: 'border-box', marginBottom: '16px' }}
+            />
+            <button onClick={checkout} style={{ width: '100%', padding: '14px', background: gold, color: '#060608', border: 'none', borderRadius: '10px', fontFamily: 'Georgia, serif', fontWeight: 'bold', fontSize: '15px', cursor: 'pointer', marginBottom: '10px' }}>
+              Continue to Checkout →
+            </button>
+            <button onClick={() => setShowEmailModal(false)} style={{ width: '100%', padding: '10px', background: 'transparent', border: 'none', color: dim, fontFamily: 'Georgia, serif', fontSize: '13px', cursor: 'pointer' }}>Cancel</button>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer style={{ padding: '32px 24px', borderTop: '1px solid rgba(200,146,42,0.15)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
