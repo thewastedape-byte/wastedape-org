@@ -216,10 +216,11 @@ export default function HomePage() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '40px' }}>
             <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '14px', padding: '28px', textAlign: 'center' }}>
-              <div style={{ fontSize: '36px', marginBottom: '12px' }}>💬</div>
-              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '8px' }}>Chat with Maximus</h3>
-              <p style={{ ...dim, fontSize: '14px', marginBottom: '20px', lineHeight: '1.6' }}>Ask anything — pricing, timelines, what's possible. Maximus answers 24/7.</p>
-              <Link href="/maximus" className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none', padding: '12px 24px', fontSize: '15px' }}>Start Chatting →</Link>
+              <div style={{ fontSize: '36px', marginBottom: '12px' }}>📞</div>
+              <h3 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '18px', marginBottom: '8px' }}>Call or Text</h3>
+              <a href="tel:+12722733833" style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '22px', fontWeight: 'bold', textDecoration: 'none', display: 'block', marginBottom: '6px' }}>(272) 273-3833</a>
+              <p style={{ ...dim, fontSize: '12px', letterSpacing: '1px', marginBottom: '12px' }}>APE-DUDE</p>
+              <p style={{ ...dim, fontSize: '13px', margin: 0 }}>Mon–Fri, 8am–6pm EST</p>
             </div>
             <div style={{ background: 'rgba(12,10,8,0.9)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '14px', padding: '28px', textAlign: 'center' }}>
               <div style={{ fontSize: '36px', marginBottom: '12px' }}>📅</div>
