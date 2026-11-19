@@ -56,15 +56,18 @@ export async function POST(req: NextRequest) {
         const rec = await fetch(mp3Url, {
           headers: { 'Authorization': `Basic ${auth}` }
         })
-        if (rec.ok) audioBuffer = await rec.arrayBuffer()
-        else console.error('Recording download failed:', rec.status, await rec.text())
+        if (rec.ok) {
+          audioBuffer = await rec.arrayBuffer()
+        } else {
+          console.error('Recording download failed:', rec.status)
+        }
       } catch (e) {
         console.error('Failed to download recording:', e)
       }
     }
 
     if (audioBuffer && audioBuffer.byteLength > 0) {
-      // Send as MP3 audio file (sendAudio supports MP3, sendVoice requires OGG)
+      // Send as MP3 audio (sendAudio supports MP3; sendVoice requires OGG only)
       const formData = new FormData()
       formData.append('chat_id', TELEGRAM_CHAT_ID)
       formData.append('caption', `📞 New Voicemail — WastedApe Tech\n\nFrom: ${callerFormatted}\nDuration: ${duration}`)
@@ -82,7 +85,7 @@ export async function POST(req: NextRequest) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           chat_id: TELEGRAM_CHAT_ID,
-          text: `📞 New Voicemail — WastedApe Tech\n\nFrom: ${callerFormatted}\nDuration: ${duration}\n\n⚠️ Audio download failed — check Render logs.`,
+          text: `📞 New Voicemail — WastedApe Tech\n\nFrom: ${callerFormatted}\nDuration: ${duration}\n\n⚠️ Audio unavailable.`,
         }),
       })
     }
