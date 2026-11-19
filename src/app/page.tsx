@@ -86,6 +86,14 @@ const APPS = [
     logo: '/logo.svg',
     status: '🟢 Live',
   },
+  {
+    name: 'Fret Buddy',
+    tagline: 'AI Guitar Teacher',
+    desc: 'Learn guitar with an AI instructor that adapts to your level. Chords, scales, songs, and real-time feedback.',
+    url: 'https://fretbuddy.thewastedape.com',
+    logo: '/logo.svg',
+    status: '🟢 Live',
+  },
 ]
 
 export default function HomePage() {
