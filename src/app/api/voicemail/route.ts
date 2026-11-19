@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+export const runtime = 'nodejs'
+
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || ''
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '8590935363'
 const SW_PROJECT_ID = process.env.SW_PROJECT_ID || ''
 const SW_AUTH_TOKEN = process.env.SW_AUTH_TOKEN || ''
+const SW_BASE = 'https://the-wastedape.signalwire.com/api/laml/2010-04-01'
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,53 +16,73 @@ export async function POST(req: NextRequest) {
     const recordingStatus = params.get('RecordingStatus')
     const recordingUrl = params.get('RecordingUrl')
     const recordingDuration = params.get('RecordingDuration')
-    const from = params.get('From') || params.get('Caller') || 'Unknown'
+    const callSid = params.get('CallSid')
 
     if (recordingStatus !== 'completed' || !recordingUrl) {
       return NextResponse.json({ ok: true })
     }
 
     const duration = recordingDuration ? `${recordingDuration}s` : 'unknown'
-    const callerFormatted = from.replace(/\+1(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
+
+    // Look up caller number from CallSid
+    let callerFormatted = 'Unknown'
+    if (callSid && SW_PROJECT_ID && SW_AUTH_TOKEN) {
+      try {
+        const auth = Buffer.from(`${SW_PROJECT_ID}:${SW_AUTH_TOKEN}`).toString('base64')
+        const callRes = await fetch(`${SW_BASE}/Accounts/${SW_PROJECT_ID}/Calls/${callSid}`, {
+          headers: { 'Authorization': `Basic ${auth}` }
+        })
+        if (callRes.ok) {
+          const callData = await callRes.json()
+          const from = callData.from || callData.From || ''
+          if (from) callerFormatted = from.replace(/\+1(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
+        }
+      } catch (e) {
+        console.error('Failed to look up caller:', e)
+      }
+    }
 
     if (!TELEGRAM_BOT_TOKEN) {
       console.error('No TELEGRAM_BOT_TOKEN set')
       return NextResponse.json({ ok: true })
     }
 
-    // Download recording from SignalWire (requires auth)
+    // Download recording — append .mp3 for audio format
     let audioBuffer: ArrayBuffer | null = null
     if (SW_PROJECT_ID && SW_AUTH_TOKEN) {
       try {
         const auth = Buffer.from(`${SW_PROJECT_ID}:${SW_AUTH_TOKEN}`).toString('base64')
-        const rec = await fetch(recordingUrl, {
+        const mp3Url = recordingUrl.endsWith('.mp3') ? recordingUrl : `${recordingUrl}.mp3`
+        const rec = await fetch(mp3Url, {
           headers: { 'Authorization': `Basic ${auth}` }
         })
         if (rec.ok) audioBuffer = await rec.arrayBuffer()
+        else console.error('Recording download failed:', rec.status, await rec.text())
       } catch (e) {
         console.error('Failed to download recording:', e)
       }
     }
 
-    if (audioBuffer) {
-      // Send as actual voice message
+    if (audioBuffer && audioBuffer.byteLength > 0) {
+      // Send as MP3 audio file (sendAudio supports MP3, sendVoice requires OGG)
       const formData = new FormData()
       formData.append('chat_id', TELEGRAM_CHAT_ID)
-      formData.append('caption', `📞 New Voicemail — WastedApe Tech\n\nFrom: ${callerFormatted}\nDuration: ${duration}\n\nReply or call back when ready.`)
-      formData.append('voice', new Blob([audioBuffer], { type: 'audio/mpeg' }), 'voicemail.mp3')
+      formData.append('caption', `📞 New Voicemail — WastedApe Tech\n\nFrom: ${callerFormatted}\nDuration: ${duration}`)
+      formData.append('audio', new Blob([audioBuffer], { type: 'audio/mpeg' }), 'voicemail.mp3')
 
-      await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendVoice`, {
+      const tgRes = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendAudio`, {
         method: 'POST',
         body: formData,
       })
+      if (!tgRes.ok) console.error('Telegram sendAudio failed:', await tgRes.text())
     } else {
-      // Fallback: text message
+      // Fallback text notification
       await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           chat_id: TELEGRAM_CHAT_ID,
-          text: `📞 New Voicemail — WastedApe Tech\n\nFrom: ${callerFormatted}\nDuration: ${duration}\n\nReply or call back when ready.`,
+          text: `📞 New Voicemail — WastedApe Tech\n\nFrom: ${callerFormatted}\nDuration: ${duration}\n\n⚠️ Audio download failed — check Render logs.`,
         }),
       })
     }
