@@ -89,7 +89,7 @@ export default function MaximusConsultation() {
               type="text"
               value={name}
               onChange={e => setName(e.target.value)}
-              placeholder="Dan Bloom"
+              placeholder="Your full name"
               style={{ width: '100%', background: 'rgba(245,240,232,0.06)', border: '1px solid rgba(198,139,58,0.3)', borderRadius: '8px', padding: '12px 14px', color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '14px', outline: 'none', boxSizing: 'border-box' }}
             />
           </div>
