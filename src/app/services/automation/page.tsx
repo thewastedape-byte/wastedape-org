@@ -1,48 +1,118 @@
-'use client'
-import Link from 'next/link'
+'use client';
+
+import Link from 'next/link';
+
 export default function AutomationPage() {
-  const accent = { color: '#C68B3A', fontFamily: 'Georgia, serif' }
-  const bright = { color: '#F5F0E8', fontFamily: 'Georgia, serif' }
-  const dim = { color: 'rgba(245,240,232,0.55)', fontFamily: 'Georgia, serif' }
   return (
-    <div style={{ background: '#1a1a1a', minHeight: '100vh', color: '#F5F0E8', padding: '2rem' }}>
-      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <div style={{ marginBottom: '2rem', fontSize: '0.9rem' }}>
-          <span style={accent}>🦍 WastedApe</span> / Automation
-          <br />
-          <Link href="/services" style={{ ...dim, textDecoration: 'underline' }}>← All Services</Link>
-        </div>
-        
-        <div style={{ marginBottom: '3rem' }}>
-          <h1 style={{ ...bright, fontSize: '2.5rem', marginBottom: '1rem' }}>INDUSTRIAL AUTOMATION</h1>
-          <p style={dim}>Automation Controls & PLC Programming</p>
-        </div>
-
-        <div style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
-          <p>Allen-Bradley and Siemens PLC programming, control system integration, and industrial automation design. 20 years of hands-on OT experience.</p>
-        </div>
-
-        <div style={{ marginBottom: '2rem', borderTop: '1px solid rgba(198, 139, 58, 0.3)', paddingTop: '1.5rem' }}>
-          <h2 style={{ ...accent, fontSize: '1.2rem', marginBottom: '1rem' }}>WHAT WE DO</h2>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            <li style={{ marginBottom: '0.5rem' }}>• Allen-Bradley / Studio 5000 PLC programming</li>
-            <li style={{ marginBottom: '0.5rem' }}>• Siemens S7 / TIA Portal programming</li>
-            <li style={{ marginBottom: '0.5rem' }}>• PROFINET, EtherNet/IP, CANbus integration</li>
-            <li style={{ marginBottom: '0.5rem' }}>• Control panel design and integration</li>
-            <li style={{ marginBottom: '0.5rem' }}>• VFD configuration and commissioning</li>
-            <li style={{ marginBottom: '0.5rem' }}>• Automation system troubleshooting and retrofits</li>
-          </ul>
-        </div>
-
-        <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(198, 139, 58, 0.3)', paddingTop: '1.5rem' }}>
-          <h2 style={{ ...accent, fontSize: '1.2rem', marginBottom: '1.5rem' }}>Pricing</h2>
-          <p style={dim}>Register to see pricing or contact us to discuss your project.</p>
-          <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem' }}>
-            <Link href="/signup" style={{ ...accent, padding: '0.75rem 1.5rem', border: `1px solid ${accent.color}`, textDecoration: 'none', borderRadius: '4px' }}>Register to See Pricing</Link>
-            <Link href="/maximus/book" style={{ ...bright, padding: '0.75rem 1.5rem', background: accent.color, color: '#1a1a1a', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold' }}>Contact for Deposit-Based Engagement</Link>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+      {/* Header */}
+      <div className="border-b border-slate-800 bg-slate-950/50 backdrop-blur">
+        <div className="max-w-4xl mx-auto px-6 py-12">
+          <h1 className="text-5xl font-bold mb-4" style={{ color: '#C68B3A' }}>
+            Industrial Automation
+          </h1>
+          <p className="text-lg text-slate-400">PLC Programming. Control Systems. Integration.</p>
         </div>
       </div>
+
+      {/* Content */}
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        {/* Back Button */}
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '24px 24px 0' }}>
+          <Link href="/services" style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '14px', textDecoration: 'none' }}>← Back to Services</Link>
+        </div>
+
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold mb-6" style={{ fontFamily: 'Georgia, serif' }}>
+            What We Do
+          </h2>
+          <p className="text-lg text-slate-300 mb-6 leading-relaxed">
+            We design and implement industrial automation systems that streamline production, improve efficiency, and reduce downtime. From PLC programming to full control system integration, we handle everything from concept through commissioning.
+          </p>
+        </section>
+
+        <section className="mb-12">
+          <h3 className="text-2xl font-bold mb-4" style={{ color: '#C68B3A' }}>
+            Services Include
+          </h3>
+          <ul className="text-slate-300 space-y-3 text-lg">
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>→</span>
+              <span>Automation system design and architecture</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>→</span>
+              <span>PLC programming (Allen-Bradley Studio 5000, Siemens TIA Portal)</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>→</span>
+              <span>Control panel design and integration</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>→</span>
+              <span>Industrial networking (PROFINET, EtherNet/IP)</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>→</span>
+              <span>System commissioning and optimization</span>
+            </li>
+          </ul>
+        </section>
+
+        <section className="mb-12">
+          <h3 className="text-2xl font-bold mb-4" style={{ color: '#C68B3A' }}>
+            Technologies We Use
+          </h3>
+          <ul className="text-slate-300 space-y-3 text-lg">
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>•</span>
+              <span>Allen-Bradley (Studio 5000, CompactLogix, ControlLogix)</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>•</span>
+              <span>Siemens (TIA Portal, S7-1200, S7-1500)</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>•</span>
+              <span>PROFINET and EtherNet/IP networking</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>•</span>
+              <span>HMI/SCADA integration</span>
+            </li>
+          </ul>
+        </section>
+
+        {/* Pricing Gate */}
+        <section className="bg-slate-800/30 border border-slate-700 rounded-lg p-8 mb-12">
+          <h3 className="text-2xl font-bold mb-4">Pricing</h3>
+          <p className="text-slate-400 text-lg mb-6">
+            Automation projects are tailored to your production environment. Costs depend on system scope, complexity, and hardware requirements.
+          </p>
+          <Link
+            href="/register"
+            className="inline-block px-6 py-3 rounded-lg font-semibold text-white transition-colors"
+            style={{ backgroundColor: '#C68B3A' }}
+          >
+            Register to See Pricing
+          </Link>
+        </section>
+
+        {/* CTA */}
+        <section className="text-center">
+          <h3 className="text-2xl font-bold mb-4">Ready to Automate?</h3>
+          <p className="text-slate-400 text-lg mb-6">
+            Tell us about your production challenge. Let's design a system that works.
+          </p>
+          <Link
+            href="/maximus/book"
+            className="inline-block px-8 py-4 rounded-lg font-semibold text-white transition-all hover:shadow-lg"
+            style={{ backgroundColor: '#C68B3A' }}
+          >
+            Discuss Your Project
+          </Link>
+        </section>
+      </div>
     </div>
-  )
+  );
 }

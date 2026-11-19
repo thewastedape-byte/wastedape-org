@@ -1,48 +1,106 @@
-'use client'
-import Link from 'next/link'
+'use client';
+
+import Link from 'next/link';
+
 export default function EngineeringPage() {
-  const accent = { color: '#C68B3A', fontFamily: 'Georgia, serif' }
-  const bright = { color: '#F5F0E8', fontFamily: 'Georgia, serif' }
-  const dim = { color: 'rgba(245,240,232,0.55)', fontFamily: 'Georgia, serif' }
   return (
-    <div style={{ background: '#1a1a1a', minHeight: '100vh', color: '#F5F0E8', padding: '2rem' }}>
-      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <div style={{ marginBottom: '2rem', fontSize: '0.9rem' }}>
-          <span style={accent}>🦍 WastedApe</span> / Engineering
-          <br />
-          <Link href="/services" style={{ ...dim, textDecoration: 'underline' }}>← All Services</Link>
-        </div>
-        
-        <div style={{ marginBottom: '3rem' }}>
-          <h1 style={{ ...bright, fontSize: '2.5rem', marginBottom: '1rem' }}>ENGINEERING</h1>
-          <p style={dim}>Electrical, SCADA & PLC Engineering</p>
-        </div>
-
-        <div style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
-          <p>Engineering consulting for electrical systems, SCADA architecture, and PLC system design. Project-based engagements funded by client deposit.</p>
-        </div>
-
-        <div style={{ marginBottom: '2rem', borderTop: '1px solid rgba(198, 139, 58, 0.3)', paddingTop: '1.5rem' }}>
-          <h2 style={{ ...accent, fontSize: '1.2rem', marginBottom: '1rem' }}>WHAT WE DO</h2>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            <li style={{ marginBottom: '0.5rem' }}>• Electrical engineering consulting and system design</li>
-            <li style={{ marginBottom: '0.5rem' }}>• SCADA architecture and HMI design</li>
-            <li style={{ marginBottom: '0.5rem' }}>• Control narrative and functional spec development</li>
-            <li style={{ marginBottom: '0.5rem' }}>• 480V 3-phase power system consulting</li>
-            <li style={{ marginBottom: '0.5rem' }}>• OT/IT convergence planning</li>
-            <li style={{ marginBottom: '0.5rem' }}>• Engineering drawing review and redline</li>
-          </ul>
-        </div>
-
-        <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(198, 139, 58, 0.3)', paddingTop: '1.5rem' }}>
-          <h2 style={{ ...accent, fontSize: '1.2rem', marginBottom: '1.5rem' }}>Deposit-Based Engagement</h2>
-          <p style={dim}>Engineering projects are scoped and funded via deposit. Contact us to discuss your needs.</p>
-          <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem' }}>
-            <Link href="/signup" style={{ ...accent, padding: '0.75rem 1.5rem', border: `1px solid ${accent.color}`, textDecoration: 'none', borderRadius: '4px' }}>Register to See Pricing</Link>
-            <Link href="/maximus/book" style={{ ...bright, padding: '0.75rem 1.5rem', background: accent.color, color: '#1a1a1a', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold' }}>Contact for Deposit-Based Engagement</Link>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+      {/* Header */}
+      <div className="border-b border-slate-800 bg-slate-950/50 backdrop-blur">
+        <div className="max-w-4xl mx-auto px-6 py-12">
+          <h1 className="text-5xl font-bold mb-4" style={{ color: '#C68B3A' }}>
+            Engineering Services
+          </h1>
+          <p className="text-lg text-slate-400">Electrical. SCADA. PLC System Design.</p>
         </div>
       </div>
+
+      {/* Content */}
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        {/* Back Button */}
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '24px 24px 0' }}>
+          <Link href="/services" style={{ color: '#C8922A', fontFamily: 'Georgia, serif', fontSize: '14px', textDecoration: 'none' }}>← Back to Services</Link>
+        </div>
+
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold mb-6" style={{ fontFamily: 'Georgia, serif' }}>
+            What We Do
+          </h2>
+          <p className="text-lg text-slate-300 mb-6 leading-relaxed">
+            We provide electrical engineering consulting and control system design for industrial and commercial applications. Our expertise spans SCADA architecture, PLC system design, and electrical engineering documentation.
+          </p>
+        </section>
+
+        <section className="mb-12">
+          <h3 className="text-2xl font-bold mb-4" style={{ color: '#C68B3A' }}>
+            Services Include
+          </h3>
+          <ul className="text-slate-300 space-y-3 text-lg">
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>→</span>
+              <span>Control system architecture and design</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>→</span>
+              <span>SCADA system engineering and configuration</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>→</span>
+              <span>PLC system design and specification</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>→</span>
+              <span>Electrical engineering drawings (AutoCAD Electrical)</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-gold mr-4" style={{ color: '#C68B3A' }}>→</span>
+              <span>Control narratives and system documentation</span>
+            </li>
+          </ul>
+        </section>
+
+        <section className="mb-12">
+          <h3 className="text-2xl font-bold mb-4" style={{ color: '#C68B3A' }}>
+            Design & Consulting Available Now
+          </h3>
+          <p className="text-slate-300 text-lg mb-4">
+            We're available for design and consulting services immediately. Full implementation services are coming soon as software licensing is finalized.
+          </p>
+          <p className="text-slate-400 text-base">
+            Our approach: understand your process, design a system that scales, document everything clearly, hand it off to implementation teams.
+          </p>
+        </section>
+
+        {/* Pricing Gate */}
+        <section className="bg-slate-800/30 border border-slate-700 rounded-lg p-8 mb-12">
+          <h3 className="text-2xl font-bold mb-4">Pricing</h3>
+          <p className="text-slate-400 text-lg mb-6">
+            Engineering services are quoted based on project scope, complexity, and deliverables. Design work starts immediately; implementation follows.
+          </p>
+          <Link
+            href="/register"
+            className="inline-block px-6 py-3 rounded-lg font-semibold text-white transition-colors"
+            style={{ backgroundColor: '#C68B3A' }}
+          >
+            Register to See Pricing
+          </Link>
+        </section>
+
+        {/* CTA */}
+        <section className="text-center">
+          <h3 className="text-2xl font-bold mb-4">Let's Design Your System</h3>
+          <p className="text-slate-400 text-lg mb-6">
+            Ready to discuss your control system needs. We'll engineer a solution built to last.
+          </p>
+          <Link
+            href="/maximus/book"
+            className="inline-block px-8 py-4 rounded-lg font-semibold text-white transition-all hover:shadow-lg"
+            style={{ backgroundColor: '#C68B3A' }}
+          >
+            Discuss Your Needs
+          </Link>
+        </section>
+      </div>
     </div>
-  )
+  );
 }
