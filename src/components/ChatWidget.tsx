@@ -18,7 +18,7 @@ export default function ChatWidget() {
   const gold = '#C8922A'
   const bg = '#0c0a08'
   const surface = '#131110'
-  const border = 'rgba(200,146,42,0.25)'
+  const border = 'rgba(200,146,42,0.5)'
   const dim = 'rgba(245,240,232,0.65)'
   const light = '#F5F0E8'
 
@@ -190,12 +190,14 @@ export default function ChatWidget() {
               onClick={send}
               disabled={loading || !input.trim()}
               style={{
-                background: input.trim() && !loading ? gold : 'rgba(200,146,42,0.3)',
-                border: 'none', borderRadius: '10px',
+                background: input.trim() && !loading ? gold : 'rgba(200,146,42,0.45)',
+                border: `1px solid ${gold}`,
+                borderRadius: '10px',
                 width: '40px', height: '40px',
                 cursor: input.trim() && !loading ? 'pointer' : 'default',
                 fontSize: '18px', display: 'flex',
                 alignItems: 'center', justifyContent: 'center',
+                color: '#F5F0E8',
                 flexShrink: 0, transition: 'background 0.2s'
               }}
             >↑</button>
