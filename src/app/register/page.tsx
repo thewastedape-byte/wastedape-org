@@ -1,7 +1,7 @@
 'use client'
-
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -18,6 +18,29 @@ export default function RegisterPage() {
     service_interest: 'general',
   })
 
+  const gold = '#C8922A'
+  const dim = 'rgba(245,240,232,0.6)'
+  const inputStyle = {
+    width: '100%',
+    padding: '12px 16px',
+    background: 'rgba(255,255,255,0.05)',
+    border: '1px solid rgba(200,146,42,0.4)',
+    borderRadius: '10px',
+    color: '#F5F0E8',
+    fontSize: '14px',
+    fontFamily: 'Georgia, serif',
+    outline: 'none',
+    boxSizing: 'border-box' as const,
+  }
+  const labelStyle = {
+    display: 'block',
+    color: 'rgba(245,240,232,0.7)',
+    fontFamily: 'Georgia, serif',
+    fontSize: '13px',
+    marginBottom: '6px',
+    letterSpacing: '0.5px',
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
@@ -27,23 +50,14 @@ export default function RegisterPage() {
     e.preventDefault()
     setLoading(true)
     setError(null)
-
     try {
       const response = await fetch('/api/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          action: 'signup',
-        }),
+        body: JSON.stringify({ ...formData, action: 'signup' }),
       })
-
       const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Registration failed')
-      }
-
+      if (!response.ok) throw new Error(data.error || 'Registration failed')
       setSubmitted(true)
       setSubmittedEmail(formData.email)
     } catch (err: any) {
@@ -55,122 +69,91 @@ export default function RegisterPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center px-4">
-        <div className="max-w-md w-full bg-gray-800 rounded-lg shadow-xl p-8 text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">✓ Check Your Email</h1>
-          <p className="text-gray-300 mb-2">
-            We sent a magic link to:
-          </p>
-          <p className="text-blue-400 font-semibold mb-6">{submittedEmail}</p>
-          <p className="text-gray-400 text-sm mb-6">
-            Click the link in your email to verify your account and access the dashboard.
-          </p>
-          <button
-            onClick={() => router.push('/')}
-            className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition"
-          >
-            Back to Home
-          </button>
+      <div style={{ background: '#060608', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
+        <div style={{ maxWidth: '460px', width: '100%', textAlign: 'center', background: 'rgba(12,10,8,0.95)', border: '1px solid rgba(200,146,42,0.3)', borderRadius: '20px', padding: '48px 36px' }}>
+          <div style={{ fontSize: '48px', marginBottom: '20px' }}>✅</div>
+          <h2 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '24px', marginBottom: '12px' }}>Check Your Email</h2>
+          <p style={{ color: dim, fontFamily: 'Georgia, serif', fontSize: '14px', marginBottom: '8px', lineHeight: '1.6' }}>We sent a magic link to:</p>
+          <p style={{ color: gold, fontFamily: 'Georgia, serif', fontSize: '16px', fontWeight: 'bold', marginBottom: '24px' }}>{submittedEmail}</p>
+          <p style={{ color: dim, fontFamily: 'Georgia, serif', fontSize: '13px', marginBottom: '32px', lineHeight: '1.6' }}>Click the link in your email to verify your account and access the dashboard.</p>
+          <Link href="/" style={{ display: 'inline-block', background: gold, color: '#060608', fontFamily: 'Georgia, serif', fontWeight: 'bold', padding: '12px 32px', borderRadius: '10px', textDecoration: 'none', fontSize: '15px' }}>Back to Home</Link>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center px-4 py-12">
-      <div className="max-w-md w-full bg-gray-800 rounded-lg shadow-xl p-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Register</h1>
-        <p className="text-gray-400 mb-6">Get access to our services and exclusive content</p>
+    <div style={{ background: '#060608', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
+      <div style={{ maxWidth: '460px', width: '100%' }}>
 
-        {error && (
-          <div className="mb-4 p-3 bg-red-900/50 border border-red-700 rounded text-red-200 text-sm">
-            {error}
-          </div>
-        )}
+        {/* Logo */}
+        <div style={{ textAlign: 'center', marginBottom: '36px' }}>
+          <Link href="/">
+            <img src="/logo.svg" alt="WastedApe" style={{ height: '80px', width: '80px', borderRadius: '50%', border: '2px solid rgba(200,146,42,0.5)', boxShadow: '0 0 30px rgba(200,146,42,0.2)', marginBottom: '14px' }} />
+          </Link>
+          <p style={{ color: gold, fontFamily: 'Georgia, serif', fontWeight: 'bold', fontSize: '16px', margin: '0 0 2px', letterSpacing: '1px' }}>THE WASTED APE</p>
+          <p style={{ color: 'rgba(245,240,232,0.4)', fontFamily: 'Georgia, serif', fontSize: '10px', letterSpacing: '2px', margin: 0 }}>TECH SOLUTIONS</p>
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-gray-300 font-medium mb-2">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
-              placeholder="Your full name"
-            />
-          </div>
+        {/* Card */}
+        <div style={{ background: 'rgba(12,10,8,0.95)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: '20px', padding: '40px 36px' }}>
+          <h1 style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif', fontSize: '26px', fontWeight: 'bold', margin: '0 0 6px', textAlign: 'center' }}>Create Account</h1>
+          <p style={{ color: dim, fontFamily: 'Georgia, serif', fontSize: '14px', textAlign: 'center', margin: '0 0 28px', lineHeight: '1.6' }}>Get access to services, pricing, and your dashboard.</p>
 
-          <div>
-            <label className="block text-gray-300 font-medium mb-2">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
-              placeholder="your@email.com"
-            />
-          </div>
+          {error && (
+            <div style={{ background: 'rgba(224,85,85,0.1)', border: '1px solid rgba(224,85,85,0.4)', borderRadius: '8px', padding: '12px 16px', color: '#e05555', fontFamily: 'Georgia, serif', fontSize: '13px', marginBottom: '20px' }}>
+              {error}
+            </div>
+          )}
 
-          <div>
-            <label className="block text-gray-300 font-medium mb-2">Company</label>
-            <input
-              type="text"
-              name="company"
-              value={formData.company}
-              onChange={handleChange}
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
-              placeholder="Your company"
-            />
-          </div>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            <div>
+              <label style={labelStyle}>Name</label>
+              <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your full name" style={inputStyle} />
+            </div>
+            <div>
+              <label style={labelStyle}>Email</label>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="your@email.com" style={inputStyle} />
+            </div>
+            <div>
+              <label style={labelStyle}>Company <span style={{ color: 'rgba(245,240,232,0.3)' }}>(optional)</span></label>
+              <input type="text" name="company" value={formData.company} onChange={handleChange} placeholder="Your company" style={inputStyle} />
+            </div>
+            <div>
+              <label style={labelStyle}>Phone <span style={{ color: 'rgba(245,240,232,0.3)' }}>(optional)</span></label>
+              <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+1 (555) 000-0000" style={inputStyle} />
+            </div>
+            <div>
+              <label style={labelStyle}>What are you interested in?</label>
+              <select name="service_interest" value={formData.service_interest} onChange={handleChange} style={inputStyle}>
+                <option value="general">Select a service...</option>
+                <option value="ai_bots">Custom AI Bots</option>
+                <option value="telemarketing">AI Telemarketing</option>
+                <option value="leads">Lead Generation</option>
+                <option value="booking">Appointment Booking</option>
+                <option value="controls">Industrial Controls</option>
+                <option value="datacenter">Data Center Audit</option>
+                <option value="builds">API / Custom Build</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
 
-          <div>
-            <label className="block text-gray-300 font-medium mb-2">Phone</label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
-              placeholder="+1 (555) 000-0000"
-            />
-          </div>
+            <button type="submit" disabled={loading} style={{
+              width: '100%', padding: '14px', marginTop: '8px',
+              background: loading ? 'rgba(200,146,42,0.4)' : gold,
+              color: '#060608', border: 'none', borderRadius: '10px',
+              fontFamily: 'Georgia, serif', fontWeight: 'bold', fontSize: '16px',
+              cursor: loading ? 'default' : 'pointer', transition: 'background 0.2s'
+            }}>
+              {loading ? 'Sending...' : 'Send Magic Link →'}
+            </button>
+          </form>
 
-          <div>
-            <label className="block text-gray-300 font-medium mb-2">Service Interest</label>
-            <select
-              name="service_interest"
-              value={formData.service_interest}
-              onChange={handleChange}
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
-            >
-              <option value="general">Select a service...</option>
-              <option value="web_development">Web Development</option>
-              <option value="mobile_app">Mobile App</option>
-              <option value="design">Design</option>
-              <option value="consulting">Consulting</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white rounded-lg font-medium transition"
-          >
-            {loading ? 'Sending...' : 'Send Magic Link'}
-          </button>
-        </form>
-
-        <p className="text-gray-400 text-sm text-center mt-6">
-          Already registered?{' '}
-          <a href="/login" className="text-blue-400 hover:text-blue-300">
-            Sign in
-          </a>
-        </p>
+          <p style={{ color: dim, fontFamily: 'Georgia, serif', fontSize: '13px', textAlign: 'center', marginTop: '24px' }}>
+            Already registered?{' '}
+            <Link href="/login" style={{ color: gold, textDecoration: 'none' }}>Sign in</Link>
+          </p>
+        </div>
       </div>
     </div>
   )
