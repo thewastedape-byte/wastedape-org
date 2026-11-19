@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
+  'https://yruuzkxpnbgruwuivchy.supabase.co',
+  proces…_KEY || 'eyJhbG…_qkE'
 )
 
 export async function POST(req: NextRequest) {
@@ -13,26 +13,29 @@ export async function POST(req: NextRequest) {
                req.headers.get('x-real-ip') || 'unknown'
     const userAgent = req.headers.get('user-agent') || ''
 
-    // Enrich IP via IPinfo (free tier - 50k/month)
+    // Skip tracking admin/internal pages and bots
+    if (page.startsWith('/admin') || page.startsWith('/api')) {
+      return NextResponse.json({ ok: true })
+    }
+
+    // Enrich IP via ipapi.co (free, no key needed, 1k/day)
     let enriched: any = {}
-    if (ip && ip !== 'unknown' && ip !== '127.0.0.1') {
-      const token = process.env.IPINFO_TOKEN
-      const url = token 
-        ? `https://ipinfo.io/${ip}?token=${token}`
-        : `https://ipinfo.io/${ip}`
-      
+    if (ip && ip !== 'unknown' && ip !== '127.0.0.1' && !ip.startsWith('192.168') && !ip.startsWith('10.')) {
       try {
-        const ipRes = await fetch(url)
+        const ipRes = await fetch(`https://ipapi.co/${ip}/json/`, {
+          headers: { 'User-Agent': 'wastedape-tracker/1.0' }
+        })
         if (ipRes.ok) enriched = await ipRes.json()
       } catch {
         // IP enrichment failed, continue without it
       }
     }
 
-    const company = enriched.org || null
+    // ipapi.co field names
+    const company = enriched.org || enriched.asn?.org || null
     const city = enriched.city || null
-    const region = enriched.region || null
-    const country = enriched.country || null
+    const region = enriched.region || enriched.region_name || null
+    const country = enriched.country_name || enriched.country || null
     const hostname = enriched.hostname || null
 
     // Store in Supabase

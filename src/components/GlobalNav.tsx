@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 export default function GlobalNav() {
   const pathname = usePathname()
   // Homepage has its own nav already
-  if (pathname === '/') return null
+  if (pathname === '/' || pathname.startsWith('/admin')) return null
 
   return (
     <nav style={{
