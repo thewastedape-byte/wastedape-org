@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WastedApe Tech — Facility Inspection Report</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; font-family: Georgia, serif; color: #111; padding: 40px; max-width: 850px; margin: 0 auto; }
+
+  /* Header */
+  .header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 3px solid #C8922A; margin-bottom: 24px; }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo { width: 64px; height: 64px; border-radius: 50%; border: 2px solid #C8922A; }
+  .company h1 { font-size: 20px; color: #111; letter-spacing: 1px; }
+  .company p { font-size: 10px; color: #C8922A; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+  .header-right { text-align: right; }
+  .report-title { font-size: 22px; font-weight: bold; color: #C8922A; letter-spacing: 1px; }
+  .report-sub { font-size: 11px; color: #666; margin-top: 2px; }
+
+  /* Client info */
+  .client-info { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #f9f7f4; border: 1px solid #e0d5c5; border-radius: 8px; padding: 16px; margin-bottom: 24px; }
+  .field label { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; color: #C8922A; display: block; margin-bottom: 4px; }
+  .field .value { border-bottom: 1px solid #ccc; min-height: 22px; font-size: 13px; padding-bottom: 2px; }
+
+  /* Section */
+  .section { margin-bottom: 24px; break-inside: avoid; }
+  .section-header { background: #C8922A; color: #fff; padding: 8px 14px; border-radius: 6px 6px 0 0; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
+  .section-body { border: 1px solid #e0d5c5; border-top: none; border-radius: 0 0 6px 6px; }
+  .check-row { display: grid; grid-template-columns: 20px 1fr 80px 120px; gap: 10px; align-items: center; padding: 8px 14px; border-bottom: 1px solid #f0ebe0; font-size: 13px; }
+  .check-row:last-child { border-bottom: none; }
+  .check-row.header-row { background: #faf7f0; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #888; font-weight: bold; padding: 6px 14px; }
+  .checkbox { width: 14px; height: 14px; border: 1.5px solid #C8922A; border-radius: 3px; flex-shrink: 0; }
+  .check-row .item { color: #222; }
+  .check-row .reading { border-bottom: 1px solid #ccc; min-height: 18px; }
+  .check-row .status { border-bottom: 1px solid #ccc; min-height: 18px; }
+
+  /* Notes */
+  .notes-box { border: 1px solid #e0d5c5; border-radius: 6px; padding: 12px; min-height: 80px; }
+  .notes-box p { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #C8922A; margin-bottom: 8px; }
+  .notes-lines div { border-bottom: 1px solid #e8e0d0; height: 24px; margin-bottom: 4px; }
+
+  /* Summary */
+  .summary { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .summary-box { border: 1px solid #e0d5c5; border-radius: 6px; padding: 14px; text-align: center; }
+  .summary-box label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: #C8922A; display: block; margin-bottom: 8px; }
+  .summary-box .big { font-size: 28px; font-weight: bold; color: #111; }
+  .summary-box .unit { font-size: 11px; color: #888; }
+
+  /* Signature */
+  .sig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  .sig-box label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: #888; display: block; margin-bottom: 24px; }
+  .sig-box .sig-line { border-bottom: 1px solid #333; margin-bottom: 4px; height: 1px; }
+  .sig-box .sig-label { font-size: 10px; color: #666; }
+
+  /* Footer */
+  .footer { margin-top: 24px; padding-top: 12px; border-top: 2px solid #C8922A; display: flex; justify-content: space-between; align-items: center; }
+  .footer p { font-size: 10px; color: #888; }
+  .footer .gold { color: #C8922A; font-weight: bold; }
+
+  @media print {
+    body { padding: 20px; }
+    .section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <img src="https://wastedape.org/logo.svg" class="logo" alt="WastedApe Tech" />
+    <div class="company">
+      <h1>THE WASTED APE</h1>
+      <p>Tech Solutions · Veteran Owned</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="report-title">FACILITY INSPECTION REPORT</div>
+    <div class="report-sub">Energy, Controls & Infrastructure Audit</div>
+  </div>
+</div>
+
+<!-- CLIENT INFO -->
+<div class="client-info">
+  <div class="field"><label>Client / Facility Name</label><div class="value"></div></div>
+  <div class="field"><label>Date of Inspection</label><div class="value"></div></div>
+  <div class="field"><label>Facility Address</label><div class="value"></div></div>
+  <div class="field"><label>Contact Name & Title</label><div class="value"></div></div>
+  <div class="field"><label>Facility Type</label><div class="value"></div></div>
+  <div class="field"><label>Inspector: Daniel Bloom — WastedApe Tech</label><div class="value">&nbsp;</div></div>
+</div>
+
+<!-- SECTION 1: ELECTRICAL -->
+<div class="section">
+  <div class="section-header">1 — Electrical Distribution & Power</div>
+  <div class="section-body">
+    <div class="check-row header-row"><span></span><span>Item</span><span>Reading</span><span>Status</span></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Main panel voltage (L1-L2-L3)</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Total facility current draw (clamp)</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Control panel current on critical loads</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Ground continuity check</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Panel thermal scan (hot spots)</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Voltage imbalance between phases</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Breaker/fuse condition</span><div class="reading"></div><div class="status"></div></div>
+  </div>
+</div>
+
+<!-- SECTION 2: CONTROLS & AUTOMATION -->
+<div class="section">
+  <div class="section-header">2 — Controls, PLC & SCADA</div>
+  <div class="section-body">
+    <div class="check-row header-row"><span></span><span>Item</span><span>Reading</span><span>Status</span></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">PLC make / model / firmware</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Control panel thermal scan</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">I/O status — inputs/outputs active</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Active fault / error codes</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">HMI condition & last backup date</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">VFD temps & cooling fan condition</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Network / PROFINET / Ethernet status</span><div class="reading"></div><div class="status"></div></div>
+  </div>
+</div>
+
+<!-- SECTION 3: COOLING & WATER -->
+<div class="section">
+  <div class="section-header">3 — Cooling Systems & Water Quality</div>
+  <div class="section-body">
+    <div class="check-row header-row"><span></span><span>Item</span><span>Reading</span><span>Status</span></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Cooling water TDS (target &lt;500 ppm)</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Conductivity (μS/cm)</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Water temperature (supply/return)</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Visible scale/corrosion on pipes</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Cooling fan / HVAC thermal scan</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Chiller / heat exchanger condition</span><div class="reading"></div><div class="status"></div></div>
+  </div>
+</div>
+
+<!-- SECTION 4: IT & NETWORK -->
+<div class="section">
+  <div class="section-header">4 — IT Infrastructure & Network</div>
+  <div class="section-body">
+    <div class="check-row header-row"><span></span><span>Item</span><span>Reading</span><span>Status</span></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Server room / rack condition</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Network switch make / age</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Cabling condition (Cat6/fiber)</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Server room thermal scan</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">UPS / backup power condition</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Cybersecurity — OT/IT separation</span><div class="reading"></div><div class="status"></div></div>
+  </div>
+</div>
+
+<!-- SECTION 5: PHYSICAL SECURITY -->
+<div class="section">
+  <div class="section-header">5 — Physical Security</div>
+  <div class="section-body">
+    <div class="check-row header-row"><span></span><span>Item</span><span>Reading</span><span>Status</span></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">CCTV coverage — blind spots</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Access control system condition</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Alarm system — panel condition</span><div class="reading"></div><div class="status"></div></div>
+    <div class="check-row"><div class="checkbox"></div><span class="item">Exterior lighting adequacy</span><div class="reading"></div><div class="status"></div></div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="summary">
+  <div class="summary-box">
+    <label>Estimated Annual Energy Waste</label>
+    <div class="big">$<span style="font-size:20px">______</span></div>
+    <div class="unit">based on current draw analysis</div>
+  </div>
+  <div class="summary-box">
+    <label>Critical Issues Found</label>
+    <div class="big">______</div>
+    <div class="unit">requiring immediate action</div>
+  </div>
+  <div class="summary-box">
+    <label>Recommended ROI</label>
+    <div class="big">______</div>
+    <div class="unit">months to payback on fixes</div>
+  </div>
+</div>
+
+<!-- FINDINGS & RECOMMENDATIONS -->
+<div class="section">
+  <div class="section-header">Key Findings & Recommendations</div>
+  <div class="section-body" style="padding: 14px;">
+    <div class="notes-lines">
+      <div></div><div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div><div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNATURES -->
+<div class="sig-row">
+  <div class="sig-box">
+    <label>Inspector Signature</label>
+    <div class="sig-line"></div>
+    <div class="sig-label">Daniel Bloom — WastedApe Tech · (272) APE-DUDE</div>
+  </div>
+  <div class="sig-box">
+    <label>Client Acknowledgment</label>
+    <div class="sig-line"></div>
+    <div class="sig-label">Name / Title / Date</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>WastedApe Tech · <span class="gold">wastedape.org</span> · thewastedape@gmail.com · (272) APE-DUDE</p>
+  <p>Veteran-Owned · Available Nationwide · Confidential</p>
+</div>
+
+</body>
+</html>
