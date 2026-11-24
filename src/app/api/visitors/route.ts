@@ -20,18 +20,21 @@ export async function POST(req: NextRequest) {
     let enriched: any = {}
     if (ip && ip !== 'unknown' && ip !== '127.0.0.1' && !ip.startsWith('192.168') && !ip.startsWith('10.')) {
       try {
-        const ipRes = await fetch(`https://ipapi.co/${ip}/json/`, {
-          headers: { 'User-Agent': 'wastedape-tracker/1.0' }
+        const ipRes = await fetch(`http://ip-api.com/json/${ip}?fields=status,country,regionName,city,isp,org,query`, {
+          signal: AbortSignal.timeout(3000)
         })
-        if (ipRes.ok) enriched = await ipRes.json()
+        if (ipRes.ok) {
+          const data = await ipRes.json()
+          if (data.status === 'success') enriched = data
+        }
       } catch {}
     }
 
-    const company = enriched.org || enriched.asn?.org || null
+    const company = enriched.org || enriched.isp || null
     const city = enriched.city || null
-    const region = enriched.region || enriched.region_name || null
-    const country = enriched.country_name || enriched.country || null
-    const hostname = enriched.hostname || null
+    const region = enriched.regionName || null
+    const country = enriched.country || null
+    const hostname = null
 
     if (supabase) {
       await supabase.from('visitors').insert({
