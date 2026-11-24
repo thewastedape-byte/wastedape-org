@@ -52,25 +52,27 @@ export async function POST(req: NextRequest) {
       referrer
     })
 
-    // Telegram alert if company identified (and not an ISP)
-    if (company && !company.includes('AS') && company.trim().length > 0) {
-      const cleanCompany = company.replace(/^AS\d+\s+/, '')
-      const botToken = process.env.TELEGRAM_BOT_TOKEN
-      const chatId = process.env.TELEGRAM_ALERT_CHAT_ID
-      
-      if (botToken && chatId) {
-        try {
-          await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: chatId,
-              text: `👁 Visitor Alert\n📄 Page: ${page}\n🏢 ${cleanCompany}\n🌍 ${city || ''}${region ? ', ' + region : ''}, ${country || ''}`
-            })
+    // Telegram alert for every visitor
+    const botToken = process.env.TELEGRAM_BOT_TOKEN
+    const chatId = process.env.TELEGRAM_ALERT_CHAT_ID
+
+    if (botToken && chatId) {
+      try {
+        const cleanCompany = company ? company.replace(/^AS\d+\s+/, '') : null
+        const locationLine = [city, region, country].filter(Boolean).join(', ')
+        const companyLine = cleanCompany ? `\n🏢 ${cleanCompany}` : `\n🌐 IP: ${ip}`
+        const locationStr = locationLine ? `\n🌍 ${locationLine}` : ''
+
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: `👁 Visitor Alert\n📄 Page: ${page}${companyLine}${locationStr}`
           })
-        } catch {
-          // Telegram alert failed, continue
-        }
+        })
+      } catch {
+        // Telegram alert failed, continue
       }
     }
 
